@@ -1,10 +1,14 @@
-# Forum-Beitrag (Inhalt ohne Anrede/Gruß – davor eigene Einleitung, optional)
+# Forum-Beitrag (komplett zum Posten)
 
 **Betreff:** Updates & Systempflege – geht das für Normalnutzer einfacher?
 
-**Kategorie:** Vorschlag an ioBroker.de (oder „Allgemein“, je nach Forum)
+**Kategorie:** ioBroker Allgemein
 
 ---
+
+Ich habe mir in den letzten Tagen immer wieder Gedanken gemacht, wie viel Systempflege ioBroker-Nutzer im Alltag mitmachen müssen, und den Entwurf schriftlich festgehalten (auch online unter https://github.com/crunchip77/iobroker-stack-care). Es ist **mein Entwurf**, nichts Offizielles von ioBroker und noch nichts Umgesetztes.
+
+Im Folgenden die Kurzfassung:
 
 **Viele wollen das Zuhause automatisieren, müssen aber nebenbei ständig am „Unterbau“ schrauben** – Betriebssystem oder fertiges Installationspaket (Image), Node (die Laufzeit für ioBroker), js-controller, viele Adapter-Updates, und oft ohne klare Reihenfolge.
 
