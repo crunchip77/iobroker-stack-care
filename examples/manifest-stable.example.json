@@ -1,0 +1,30 @@
+{
+  "_hint": "Nur Strukturbeispiel aus dem Konzept §5 – keine offizielle Manifest-URL, Werte Platzhalter.",
+  "id": "2026-Q4-stable",
+  "channel": "stable",
+  "released": "2026-11-01",
+  "risk_default": "low",
+  "profiles": {
+    "docker": {
+      "maintainer": "image",
+      "image_tag": "v12.0.0",
+      "image_major": "12"
+    },
+    "debian-installer": {
+      "maintainer": "core-community",
+      "debian_codename": "trixie",
+      "debian_version": "13",
+      "node_major": "siehe updatenode.md zum Release",
+      "js_controller_min": "siehe Freigabe-Test",
+      "admin_min": "siehe Freigabe-Test"
+    }
+  },
+  "adapter_policy": {
+    "default": "minor",
+    "auto_repositories": ["live"]
+  },
+  "preconditions": {
+    "require_backup_max_age_days": 14
+  },
+  "user_summary_de": "Kurztext für Admin – wird pro Release neu formuliert."
+}
