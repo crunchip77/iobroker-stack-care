@@ -1,4 +1,4 @@
-# Forum-Beitrag (nur diesen Block posten)
+# Forum-Beitrag (Inhalt ohne Anrede/Gruß – davor eigene Einleitung, optional)
 
 **Betreff:** Updates & Systempflege – geht das für Normalnutzer einfacher?
 
@@ -6,9 +6,7 @@
 
 ---
 
-Guten Tag,
-
-dieser Beitrag betrifft keinen einzelnen Adapter-Fehler, sondern etwas, das hier oft wiederkehrt: **Viele wollen das Zuhause automatisieren, müssen aber nebenbei ständig am „Unterbau“ schrauben** – Betriebssystem oder fertiges Installationspaket (Image), Node (die Laufzeit für ioBroker), js-controller, viele Adapter-Updates, und oft ohne klare Reihenfolge.
+Dieser Beitrag betrifft keinen einzelnen Adapter-Fehler, sondern etwas, das hier oft wiederkehrt: **Viele wollen das Zuhause automatisieren, müssen aber nebenbei ständig am „Unterbau“ schrauben** – Betriebssystem oder fertiges Installationspaket (Image), Node (die Laufzeit für ioBroker), js-controller, viele Adapter-Updates, und oft ohne klare Reihenfolge.
 
 Für jeden Schritt gibt es **gute Anleitungen**. Was vielen fehlt, ist **eine einfache Gesamtantwort:** *Läuft bei mir alles normal – und wenn nicht, was soll ich als Nächstes tun, ohne Tage im Forum zu verbringen?* Typische Themen: nach einem Update geht nichts mehr, welche Node-Version gilt, Docker mit `latest` statt fester Version, große Sprünge nach Jahren ohne Pflege, dutzende Adapter-Updates auf einmal.
 
@@ -28,5 +26,3 @@ Als **Diskussionsentwurf** habe ich unter dem Namen **„Stack Care“** etwas s
 Ausführlich (normaler Text, online lesbar): **https://github.com/crunchip77/iobroker-stack-care**  
 Diskussion dort: **https://github.com/crunchip77/iobroker-stack-care/discussions/1**  
 – oder einfach hier im Thread.
-
-Viele Grüße
