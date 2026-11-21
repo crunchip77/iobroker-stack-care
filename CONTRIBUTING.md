@@ -4,8 +4,9 @@ Dieses Repository ist eine **Diskussionsvorlage** (RFC), kein offizielles ioBrok
 
 ## Feedback
 
-- **Kleine Korrekturen** (Tippfehler, Klarheit): Pull Request oder Issue.
-- **Inhaltliche Richtungsänderung:** bitte zuerst ein Issue mit Kurzbegründung – dann PR oder Kommentar im Forum-Thread (falls verlinkt).
+- **Diskussion / Meinung:** [Discussions](https://github.com/crunchip77/iobroker-stack-care/discussions).
+- **Kleine Korrekturen** (Tippfehler, Klarheit): Pull Request oder Issue (Label `feedback`).
+- **Inhaltliche Richtungsänderung:** Discussion oder Issue mit Kurzbegründung – dann PR oder Kommentar im Forum-Thread (falls verlinkt).
 
 ## Sprache
 

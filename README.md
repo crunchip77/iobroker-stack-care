@@ -41,10 +41,11 @@ Viele Nutzer wollen automatisieren, nicht dauernd Linux/Node/Docker pflegen. Bau
 
 ## Feedback
 
-- **GitHub Issues** oder **Discussions** (wenn aktiviert).  
-- Forum-Thread (falls vorhanden): Stimmung, Maintainer-Stimmen – im Issue verlinken.
+- **[Discussions](https://github.com/crunchip77/iobroker-stack-care/discussions)** – offene Diskussion (Start: „RFC: Pflege-Problem und Stack Care“)  
+- **[Issues](https://github.com/crunchip77/iobroker-stack-care/issues)** – konkrete Punkte (Labels: `feedback`, `p1-pilot`)  
+- Forum-Thread (falls vorhanden): Stimmung, Maintainer-Stimmen – in Discussion/Issue verlinken  
 
-Pull Requests willkommen; größere Richtungsänderungen bitte vorher per Issue abstimmen.
+Pull Requests willkommen; größere Richtungsänderungen bitte vorher kurz in einer Discussion oder einem Issue skizzieren.
 
 ---
 
