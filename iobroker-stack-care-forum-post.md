@@ -1,6 +1,6 @@
 # Forum-Beitrag (nur diesen Block posten)
 
-**Betreff:** Dauerhafte Systempflege – strukturelles Thema für Nutzer?
+**Betreff:** Updates & Systempflege – geht das für Normalnutzer einfacher?
 
 **Kategorie:** Vorschlag an ioBroker.de (oder „Allgemein“, je nach Forum)
 
@@ -8,25 +8,25 @@
 
 Guten Tag,
 
-dieser Beitrag betrifft keinen konkreten Adapter-Fehler, sondern ein Muster, das hier immer wieder auftaucht: **Viele wollen Hausautomatisierung, müssen aber faktisch ständig Systempflege mitbetreiben** – Node, OS oder Image, js-controller, Adapter, oft ohne klare Reihenfolge.
+dieser Beitrag betrifft keinen einzelnen Adapter-Fehler, sondern etwas, das hier oft wiederkehrt: **Viele wollen das Zuhause automatisieren, müssen aber nebenbei ständig am „Unterbau“ schrauben** – Betriebssystem oder fertiges Installationspaket (Image), Node (die Laufzeit für ioBroker), js-controller, viele Adapter-Updates, und oft ohne klare Reihenfolge.
 
-Die Einzelschritte sind in Doku und Image gut beschrieben. **Es fehlt aus Nutzersicht oft ein roter Faden:** *Ist meine Installation in Ordnung – und wenn nicht, was ist der nächste Schritt?* Das zeigt sich in wiederkehrenden Threads (Reihenfolge nach Updates, Docker-`latest`, Node, große Sprünge, viele gleichrangige Adapter-Updates). Umsteiger nennen selten „zu wenig Adapter“, eher: zu technisch, Updates zu riskant.
+Für jeden Schritt gibt es **gute Anleitungen**. Was vielen fehlt, ist **eine einfache Gesamtantwort:** *Läuft bei mir alles normal – und wenn nicht, was soll ich als Nächstes tun, ohne Tage im Forum zu verbringen?* Typische Themen: nach einem Update geht nichts mehr, welche Node-Version gilt, Docker mit `latest` statt fester Version, große Sprünge nach Jahren ohne Pflege, dutzende Adapter-Updates auf einmal. Wer zu anderen Systemen wechselt, sagt selten „zu wenig Geräte“, eher: **zu technisch, Updates zu riskant**.
 
-Es gab schon verschiedene **Images** (SBC, Raspberry, heute viel Docker). Technisch war oft etwas da; strittig blieb **wer dauerhaft freigibt und nachzieht**. Ohne klare Zuständigkeit landen wir wieder bei veralteten Erwartungen oder abgebrochenen Angeboten – Stichwort eingestelltes Raspberry-Image. Mir geht es nicht um „noch ein Image bauen“, sondern um **Release-Absprache, Governance und eine verständliche Antwort** – und einen **kleinen Anfang**, bevor man groß verspricht.
+Es gab schon **fertige Images** (SD-Karte fürs Raspberry, heute oft Docker). Die Technik war oft da; unklar blieb: **Wer kümmert sich dauerhaft darum, welche Versionen zusammenpassen?** Ohne feste Zuständigkeiten enden solche Angebote irgendwann – Stichwort **eingestelltes Raspberry-Image**. Mir geht es nicht um „noch ein Image bauen“, sondern darum, **gemeinsam festzulegen, was „aktuell und empfohlen“ ist**, **wer das mitpflegt** und **dem Nutzer eine verständliche Rückmeldung** zu geben – und **klein anzufangen**, bevor man Großes verspricht.
 
-Als **Diskussionsentwurf** habe ich unter dem Namen **„Stack Care“** etwas skizziert – **meine Idee**, nichts von ioBroker offiziell beschlossen oder bereits umgesetzt. Gedacht ist ein **wartungsarmer, klar beschriebener Installationsweg** für die, die ihn freiwillig mitgehen wollen – zuerst z. B. festes Image-Tag und eine Upgrade-Story pro Release (**ohne** sofort neue Admin-UI). Perspektivisch: eine Admin-Übersicht mit wenigen Zuständen (in Ordnung / unkritisch / Wartung / abweichende Installation), Adapter vor allem aus `live`, beta/GitHub ehrlich ausgenommen.
+Als **Diskussionsentwurf** habe ich unter dem Namen **„Stack Care“** etwas skizziert – **meine Idee**, nichts von ioBroker offiziell, auch noch **nichts umgesetzt**. Wer mag, könnte einen **klar beschriebenen, möglichst wartungsarmen Weg** mitgehen, zuerst ganz bescheiden: z. B. im Docker-Image **eine feste Version** statt `latest` und **eine verständliche Update-Anleitung pro Release** – **ohne** sofort eine neue Seite in der Verwaltung zu bauen. Später denkbar: in der **Admin-Oberfläche** eine Übersicht in wenigen Worten – *alles ok* / *kleine Updates möglich* / *größere Wartung mit Anleitung* / *deine Installation weicht ab*. Adapter aus dem normalen Repository (`live`) anders behandeln als Test-Versionen (`beta`) oder Selbstinstalliertes von GitHub – ehrlich sagen, was automatisch mitläuft und was nicht.
 
-**Kernfrage:** Erkennt ihr das Pflege-Problem in dieser Schärfe – und lohnt sich eine gemeinsame Richtung?
+**Kernfrage:** Kennen auch ihr dieses Pflege-Problem – und lohnt es sich, **gemeinsam** eine Richtung zu suchen?
 
-1. Wie dominant ist Pflege in eurer Beobachtung (Forum, Support)?
-2. Was wäre ein akzeptabler „offizieller“ Weg (Docker-Image, Installer, beides)?
-3. Wo soll Automatik enden (Major, Image) – reicht ein geführter Assistent mit Backup-Pflicht?
-4. Was wäre ein **Minimum vor großer UX** (z. B. Release-Absatz + festes Tag + eine Upgrade-Anleitung) – und **wer könnte** das mittragen (Image-Pflege, Core)?
+1. Wie oft seht ihr im Forum Hilfeanfragen, die eigentlich „wie pflege ich mein System?“ sind?
+2. Was wäre für euch ein akzeptabler **offiziell mitgepflegter Weg** – Docker-Image, Installer auf Debian, beides?
+3. Wo soll **Automatik aufhören** (z. B. große Sprung-Updates, neues Image) – reicht ein **Assistent mit klaren Schritten und Backup davor**?
+4. Was wäre ein **kleiner erster Schritt** (z. B. kurzer Hinweis im Image-Release + feste Version + eine Anleitung) – und **wer hätte dafür Zeit** (Docker-Image-Pflege, js-controller/Admin-Team)?
 
-Ausführliche Ausarbeitung (Markdown, CC BY-SA): **https://github.com/crunchip77/iobroker-stack-care**  
+Ausführlich (normaler Text, online lesbar): **https://github.com/crunchip77/iobroker-stack-care**  
 Diskussion dort: **https://github.com/crunchip77/iobroker-stack-care/discussions/1**  
-Gerne aber auch hier im Thread.
+– oder einfach hier im Thread.
 
-**Ehrlich:** Ohne Mitwirkung von Image-Maintainer und Core bleibt es eine Analyse – dann bitte auch so sagen.
+**Ehrlich:** Ohne Mitmachen der Image-Pflege und der Core-Entwickler bleibt das nur Papier auf GitHub – dann bitte auch ehrlich zurückmelden.
 
 Viele Grüße
