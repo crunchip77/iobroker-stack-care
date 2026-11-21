@@ -41,9 +41,9 @@ Viele Nutzer wollen automatisieren, nicht dauernd Linux/Node/Docker pflegen. Bau
 
 ## Feedback
 
-- **[Discussions](https://github.com/crunchip77/iobroker-stack-care/discussions)** – offene Diskussion (Start: „RFC: Pflege-Problem und Stack Care“)  
+- **ioBroker-Forum:** https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher  
+- **[Discussions](https://github.com/crunchip77/iobroker-stack-care/discussions/1)** – GitHub-Diskussion (RFC-Feedback)  
 - **[Issues](https://github.com/crunchip77/iobroker-stack-care/issues)** – konkrete Punkte (Labels: `feedback`, `p1-pilot`)  
-- Forum-Thread (falls vorhanden): Stimmung, Maintainer-Stimmen – in Discussion/Issue verlinken  
 
 Pull Requests willkommen; größere Richtungsänderungen bitte vorher kurz in einer Discussion oder einem Issue skizzieren.
 

@@ -1,7 +1,7 @@
-# Forum-Beitrag (komplett zum Posten)
+# Forum-Beitrag (gepostet)
 
-**Betreff:** Updates & Systempflege – geht das für Normalnutzer einfacher?
-
+**Forum-Thread:** https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher  
+**Betreff:** Updates & Systempflege – geht das für Normalnutzer einfacher?  
 **Kategorie:** ioBroker Allgemein
 
 ---
