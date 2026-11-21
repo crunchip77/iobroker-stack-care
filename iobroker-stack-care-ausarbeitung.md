@@ -1,7 +1,7 @@
 # ioBroker Stack Care – Ausarbeitung (Argumentationsgrundlage)
 
 **Stand:** November 2026  
-**Status:** Entwurf zur internen Abstimmung / Vorlage vor Forum-Diskussion – **noch nicht** Community-Beschluss.  
+**Status:** Entwurf zur Abstimmung – **noch keine** gemeinsame Entscheidung der Community, nichts Offizielles von ioBroker.  
 **Ziel:** Lesbar in 15–20 Minuten; zum **Argumentieren** mit Image-Pflege, Core und Forum.
 
 **Dokumente:**
@@ -196,8 +196,8 @@ Pro Image-Release **ein** Absatz: empfohlenes Tag, Reihenfolge Backup → Adapte
 
 ## 10. FAQ (für Diskussion)
 
-**Ist das ein offizieller ioBroker-Vereinsantrag?**  
-Nein – Diskussionsvorlage, bis Mitwirkung geklärt ist.
+**Ist das ein offizielles ioBroker-Projekt?**  
+Nein – privater RFC-Entwurf zum Diskutieren; ob und wie etwas davon umgesetzt wird, hängt von Mitwirkung (Image-Pflege, Core, Community) ab.
 
 **Ersetzt das Installer/Skript?**  
 Nein – ergänzt mit **empfohlener Kombination**; Debian-Profil später optional.

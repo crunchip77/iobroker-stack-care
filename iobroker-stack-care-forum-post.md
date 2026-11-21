@@ -14,7 +14,7 @@ Die Einzelschritte sind in Doku und Image gut beschrieben. **Es fehlt aus Nutzer
 
 Es gab schon verschiedene **Images** (SBC, Raspberry, heute viel Docker). Technisch war oft etwas da; strittig blieb **wer dauerhaft freigibt und nachzieht**. Ohne klare Zuständigkeit landen wir wieder bei veralteten Erwartungen oder abgebrochenen Angeboten – Stichwort eingestelltes Raspberry-Image. Mir geht es nicht um „noch ein Image bauen“, sondern um **Release-Absprache, Governance und eine verständliche Antwort** – und einen **kleinen Anfang**, bevor man groß verspricht.
 
-Als Diskussionsentwurf habe ich **„Stack Care“** skizziert (kein Vereinsbeschluss, kein fertiges Produkt): ein **wartungsarmer offizieller Pfad** für die, die ihn wollen – beginnend z. B. mit festem Image-Tag und einer Upgrade-Story pro Release (**ohne** sofort neue Admin-UI). Perspektivisch: eine Admin-Übersicht mit wenigen Zuständen (in Ordnung / unkritisch / Wartung / abweichende Installation), Adapter vor allem aus `live`, beta/GitHub ehrlich ausgenommen.
+Als **Diskussionsentwurf** habe ich unter dem Namen **„Stack Care“** etwas skizziert – **meine Idee**, nichts von ioBroker offiziell beschlossen oder bereits umgesetzt. Gedacht ist ein **wartungsarmer, klar beschriebener Installationsweg** für die, die ihn freiwillig mitgehen wollen – zuerst z. B. festes Image-Tag und eine Upgrade-Story pro Release (**ohne** sofort neue Admin-UI). Perspektivisch: eine Admin-Übersicht mit wenigen Zuständen (in Ordnung / unkritisch / Wartung / abweichende Installation), Adapter vor allem aus `live`, beta/GitHub ehrlich ausgenommen.
 
 **Kernfrage:** Erkennt ihr das Pflege-Problem in dieser Schärfe – und lohnt sich eine gemeinsame Richtung?
 

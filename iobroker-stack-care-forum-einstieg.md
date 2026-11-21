@@ -33,7 +33,7 @@ Kurz zur Diskussion:
 3. Wo sollte Automatik enden (Major, Node, Image) – reicht ein Assistent mit Backup-Pflicht?
 4. Wer könnte einen **Release-Rhythmus** mittragen (Image-Pflege, Core) – und was wäre ein **Minimum** vor größerer UX (z. B. festes Tag + eine Upgrade-Story pro Release)?
 
-Ausführliche Ausarbeitung (Entwurf, kein offizieller Beschluss): **https://github.com/crunchip77/iobroker-stack-care** – Feedback in [Discussions/Issues](https://github.com/crunchip77/iobroker-stack-care/discussions) oder in diesem Thread.
+Ausführliche Ausarbeitung (Entwurf, nichts Offizielles von ioBroker): **https://github.com/crunchip77/iobroker-stack-care** – Feedback in [Discussions/Issues](https://github.com/crunchip77/iobroker-stack-care/discussions) oder in diesem Thread.
 
 ---
 
@@ -53,7 +53,7 @@ Heute „wartet“ im Prinzip **jeder Einzelnutzer** sein eigenes Konglomerat au
 | Admin-Anzeige „in Ordnung / Wartung“ | Core oder Admin; kein zweites Parallel-Ökosystem nötig |
 | Test vor Freigabe | **Freiwillige** aus Forum/Discord (wie bei Beta-Adaptern) |
 
-**Minimalanfang ohne neuen Vereinsapparat:** Kein neues Produkt tag eins, sondern abgestimmte **Release-Empfehlung** zum bestehenden Image (festes Tag, dokumentierte Kombination, klare Upgrade-Anleitung als *ein* Ablauf). Das wäre weniger Arbeit als die Endlosschleife identischer Forum-Hilfen.
+**Minimalanfang ohne neuen Apparat:** Kein neues Produkt tag eins, sondern abgestimmte **Release-Empfehlung** zum bestehenden Image (festes Tag, dokumentierte Kombination, klare Upgrade-Anleitung als *ein* Ablauf). Das wäre weniger Arbeit als die Endlosschleife identischer Forum-Hilfen.
 
 **Ehrlich:** Ohne Mitmachen von Core und Image-Maintainer geht das nicht – dann bleibt alles beim Status quo. Der Beitrag soll klären, ob sich das Problem lohnt und wer *bereit* wäre, welchen Teil zu tragen – nicht einen fertigen Betreiber verkünden.
 

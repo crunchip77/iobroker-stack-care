@@ -2,7 +2,7 @@
 
 **Diskussionsentwurf** für ein verbindlicheres **Betriebsmodell** rund um Systempflege (Image, Node, js-controller, Adapter) – nicht ein neues Docker-Produkt, sondern eine Schicht aus **Stack-Releases**, klarer Nutzersprache und (perspektivisch) einer Admin-Ansicht „Systempflege“.
 
-> **Status (November 2026):** Community-Diskussionsvorlage. **Kein** Beschluss des ioBroker e. V., **keine** Produktzusage, **keine** Garantie für Umsetzung. Marken „ioBroker“ gehören den jeweiligen Rechteinhabern.
+> **Status (November 2026):** Diskussionsentwurf aus der Community-Runde – **nicht** offiziell von ioBroker, **keine** Produktzusage, **keine** Garantie auf Umsetzung. Marken „ioBroker“ gehören den jeweiligen Rechteinhabern.
 
 **Sichtbarkeit:** Dieses Repository ist **öffentlich** (GitHub Public), damit Forum, Image-Pflege und Core alles ohne Zugang lesen können. Nur **credentials, private Mails oder interne Notizen** gehören nicht ins Repo (siehe [CONTRIBUTING.md](CONTRIBUTING.md)).
 

@@ -25,7 +25,7 @@
 | # | Punkt | Erledigt |
 |---|--------|----------|
 | A1 | **README.md:** Vorlage `iobroker-stack-care-README.md` → beim Push als `README.md` ins Repo-Root |
-| A2 | **Haftungs-/Status-Hinweis:** keine Garantie, keine Produktzusage ioBroker e. V. | ☐ |
+| A2 | **Haftungs-/Status-Hinweis:** Diskussionsentwurf, keine offizielle ioBroker-Position, keine Garantie |
 | A3 | **Dokumenten-Karte** (welche Datei wofür) – siehe Tabelle unten | ☐ |
 | A4 | **Lizenz** CC BY-SA 4.0 im Repo (`iobroker-stack-care/LICENSE`) | ☐ |
 | A5 | Betreff im Forum-Entwurf: Repo-URL eintragen (`forum-einstieg.md`) | ☐ |
