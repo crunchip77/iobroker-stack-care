@@ -1,6 +1,13 @@
-# Forum-Entwurf (zum Posten)
+# Forum-Entwurf (Arbeitsdatei)
 
-**Betreff-Idee:** Dauerhafte Systempflege – strukturelles Thema für Nutzer und Community?
+**Zum Kopieren:** fertiger Kurztext → **`iobroker-stack-care-forum-post.md`** (nur Block „Guten Tag …“ posten).  
+**Intern:** Antwortblöcke unten **nicht** mit dem Erstpost senden.
+
+**Betreff-Idee:** Dauerhafte Systempflege – strukturelles Thema für Nutzer?
+
+---
+
+## Archiv: längere Fassung (optional)
 
 ---
 
