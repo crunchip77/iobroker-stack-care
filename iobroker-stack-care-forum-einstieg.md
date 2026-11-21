@@ -26,7 +26,7 @@ Kurz zur Diskussion:
 3. Wo sollte Automatik enden (Major, Node, Image) – reicht ein Assistent mit Backup-Pflicht?
 4. Wer könnte einen **Release-Rhythmus** mittragen (Image-Pflege, Core) – und was wäre ein **Minimum** vor größerer UX (z. B. festes Tag + eine Upgrade-Story pro Release)?
 
-Ausführliche Ausarbeitung (Entwurf, kein offizieller Beschluss): **`<GITHUB-REPO-URL>`** – Feedback dort (Issues/Discussions) oder in diesem Thread.
+Ausführliche Ausarbeitung (Entwurf, kein offizieller Beschluss): **https://github.com/crunchip77/iobroker-stack-care** – Feedback dort (Issues) oder in diesem Thread.
 
 ---
 
