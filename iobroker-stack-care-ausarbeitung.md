@@ -11,7 +11,7 @@
 | **Dieses Papier** | Kurz, argumentierbar |
 | `iobroker-stack-care-konzept.md` | Vollständige technische Ausführung (§ 1–15) |
 | `iobroker-stack-care-review.md` | Sinn, Aufwand, Image-Historie |
-| `iobroker-stack-care-forum-post.md` | Geposteter Forumskurztext (Archiv) |
+| Forum-Kurztext | nur [im Forum](https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher) |
 | `iobroker-stack-care-admin-mockup.md` | UI-Skizze für P2 (optional) |
 
 ---
@@ -247,4 +247,4 @@ Viele Nutzer scheitern nicht an ioBroker als Automation, sondern an **mehrschich
 
 ---
 
-*Interne Arbeitsunterlage. Bei Weitergabe Version und Stand angeben.*
+*Öffentlicher RFC-Entwurf – Stand im Git-Repository.*

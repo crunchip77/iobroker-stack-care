@@ -124,4 +124,4 @@
 
 ---
 
-*Skizze November 2026 – bei Core-Gespräch `iobroker-stack-care-core-checkliste.md` mitführen.*
+*Skizze November 2026 – Diskussionsmaterial für P2 (Admin).*

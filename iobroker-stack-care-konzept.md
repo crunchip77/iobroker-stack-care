@@ -5,7 +5,7 @@
 **Argumentation (vor Forum):** `iobroker-stack-care-ausarbeitung.md` – **zuerst lesen** für Überblick.  
 **Forum-Diskussion:** https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher  
 **Review Sinn/Machbarkeit/Aufwand:** `iobroker-stack-care-review.md`  
-**Core/Admin-Gespräch (P2):** `iobroker-stack-care-core-checkliste.md`  
+**Core/Admin (P2):** technische Details § 12–13; Gesprächs-Checkliste nur lokal beim Autor.  
 **Konstellationen Review 2:** § 15 unten
 
 ---

@@ -31,9 +31,9 @@ Viele Nutzer wollen automatisieren, nicht dauernd Linux/Node/Docker pflegen. Bau
 | Datei | Für wen |
 |--------|---------|
 | [Admin-Mockup](iobroker-stack-care-admin-mockup.md) | Optional: UI-Skizze für Phase P2 |
-| [Core-Checkliste](iobroker-stack-care-core-checkliste.md) | Gespräch mit js-controller/Admin |
-| [Forum-Post (Archiv)](iobroker-stack-care-forum-post.md) | Geposteter Kurztext + Forum-Link |
 | [Manifest-Beispiel](examples/manifest-stable.example.json) | Struktur P2+ (Platzhalter) |
+
+Forum-Kurztext nur im [ioBroker-Forum-Thread](https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher) – nicht als Duplikat im Repo.
 
 ---
 
