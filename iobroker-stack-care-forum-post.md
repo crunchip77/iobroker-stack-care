@@ -29,6 +29,4 @@ Ausführlich (normaler Text, online lesbar): **https://github.com/crunchip77/iob
 Diskussion dort: **https://github.com/crunchip77/iobroker-stack-care/discussions/1**  
 – oder einfach hier im Thread.
 
-**Ehrlich:** Ohne Mitmachen der Image-Pflege und der Core-Entwickler bleibt das nur Papier auf GitHub – dann bitte auch ehrlich zurückmelden.
-
 Viele Grüße
