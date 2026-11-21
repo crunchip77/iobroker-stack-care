@@ -10,7 +10,7 @@ Dieses Repository ist eine **Diskussionsvorlage** (RFC), kein offizielles ioBrok
 
 ## Sprache
 
-Dokumente primär **Deutsch**. Englische Kurzfassung ist Backlog (siehe `iobroker-stack-care-github-vorbereitung.md`).
+Dokumente primär **Deutsch**. Englische Kurzfassung ist Backlog.
 
 ## Was nicht hier hingehört
 

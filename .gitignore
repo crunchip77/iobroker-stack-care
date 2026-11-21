@@ -2,3 +2,9 @@
 Thumbs.db
 desktop.ini
 *.tmp
+
+# Nur lokal (Antwort-Vorlagen, Pre-Post-Checklisten) – nicht öffentlich
+iobroker-stack-care-forum-einstieg.md
+iobroker-stack-care-forum-master-checkliste.md
+iobroker-stack-care-github-vorbereitung.md
+REPO-HINWEIS.md

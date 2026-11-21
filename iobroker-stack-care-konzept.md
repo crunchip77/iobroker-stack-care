@@ -3,7 +3,7 @@
 **Stand:** November 2026  
 **Nicht Ziel:** Abdeckung aller möglichen Hostszenarien; nicht ein persönliches Homelab-Setup dokumentieren.  
 **Argumentation (vor Forum):** `iobroker-stack-care-ausarbeitung.md` – **zuerst lesen** für Überblick.  
-**Forum-Diskussion (nur Problem/Ziel):** `iobroker-stack-care-forum-einstieg.md`  
+**Forum-Diskussion:** https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher  
 **Review Sinn/Machbarkeit/Aufwand:** `iobroker-stack-care-review.md`  
 **Core/Admin-Gespräch (P2):** `iobroker-stack-care-core-checkliste.md`  
 **Konstellationen Review 2:** § 15 unten

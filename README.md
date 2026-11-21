@@ -32,9 +32,7 @@ Viele Nutzer wollen automatisieren, nicht dauernd Linux/Node/Docker pflegen. Bau
 |--------|---------|
 | [Admin-Mockup](iobroker-stack-care-admin-mockup.md) | Optional: UI-Skizze für Phase P2 |
 | [Core-Checkliste](iobroker-stack-care-core-checkliste.md) | Gespräch mit js-controller/Admin |
-| [Forum-Einstieg](iobroker-stack-care-forum-einstieg.md) | Kurzpost-Vorlage (mit Repo-Link) |
-| [Forum-Master-Checkliste](iobroker-stack-care-forum-master-checkliste.md) | Vor dem ersten Forum-Post |
-| [GitHub-Vorbereitung](iobroker-stack-care-github-vorbereitung.md) | Checkliste Repo (historisch / Transparenz) |
+| [Forum-Post (Archiv)](iobroker-stack-care-forum-post.md) | Geposteter Kurztext + Forum-Link |
 | [Manifest-Beispiel](examples/manifest-stable.example.json) | Struktur P2+ (Platzhalter) |
 
 ---

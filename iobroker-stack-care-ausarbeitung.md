@@ -11,9 +11,8 @@
 | **Dieses Papier** | Kurz, argumentierbar |
 | `iobroker-stack-care-konzept.md` | Vollständige technische Ausführung (§ 1–15) |
 | `iobroker-stack-care-review.md` | Sinn, Aufwand, Image-Historie |
-| `iobroker-stack-care-forum-einstieg.md` | Kurzpost (noch nicht veröffentlicht) |
+| `iobroker-stack-care-forum-post.md` | Geposteter Forumskurztext (Archiv) |
 | `iobroker-stack-care-admin-mockup.md` | UI-Skizze für P2 (optional) |
-| `iobroker-stack-care-github-vorbereitung.md` | Checkliste eigenes GitHub-Repo |
 
 ---
 
@@ -223,9 +222,9 @@ Nein – gleiche Schritte, eingeordnet.
 
 **Reihenfolge flexibel:** öffentlicher Start kann über **GitHub** laufen; Forum nur als kurzer Verweis. Privat-Mail an Image/Core **optional und zeitlich unabhängig**.
 
-1. **GitHub (P0):** Dokumente in ein **eigenes Repo** – README, Disclaimer, Dokumenten-Karte (`github-vorbereitung.md`). Vollkonzept dort, nicht als Forum-Anhang.  
+1. **GitHub (P0):** RFC-Dokumente im öffentlichen Repo (ohne interne Antwort-Vorlagen).  
 2. **Anpassen:** Feedback über **Issues/Discussions** und/oder Forum-Thread einarbeiten.  
-3. **Forum:** kurzer Einstieg (`forum-einstieg.md`) + **ein Link** zum Repo (Problem + wenige Fragen).  
+3. **Forum:** Kurzpost + **Link** zum Repo (siehe Forum-Thread in README).  
 4. **Optional privat (nicht Voraussetzung):** Image-Pflege / Core ansprechen – **P1 Ja/Nein?** (siehe unten „Privat-Mail“).  
 5. **Bei P1-Ja:** ein konkretes Image-Release als Pilot + Erfolgskriterium (z. B. Stack-Absatz + Tester).  
 6. **Bei P1-Nein / kein Interesse:** Repo bleibt Analyse; kein großes Versprechen.
