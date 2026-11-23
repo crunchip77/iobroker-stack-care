@@ -209,14 +209,14 @@ Stack Care ist **kein zweites Update-Backend** (siehe § 4.3). In der Community 
 
 | Baustein | Führt Updates aus? | Ebene | Verhältnis zu Stack Care |
 |----------|---------------------|-------|---------------------------|
-| **Full Updater** (Wartungsskript) | Ja (`apt`, `iobroker upgrade`, …) | Host, v. a. Debian Bare Metal | Stack Care **empfiehlt** Reihenfolge/Release; Skript **bleibt** Ausführung auf dem Host |
+| **Full Updater** (Wartungsskript) | Ja (`apt`, `iobroker upgrade`, …) | Host, v. a. Debian Bare Metal | Profil `debian-installer`: Stack Care **empfiehlt** Kombination/Reihenfolge, das Skript kann sie **ausführen** – möglicher Partner |
 | **Ultimate Updater** | Ja (gebündelt, je nach Setup) | Host/VM/LXC | **Best effort** – kein Supported-Versprechen durch Stack Care |
 | **`iobroker upgrade` / js-controller** | Ja (Adapter/Controller) | ioBroker-Prozess | **Kern-Executor** in allen Runbooks |
 | **`maintenance` (Docker-Image)** | Ja (Controller im Container) | Container | Docker-Profil: fester Schritt in Stack-Release |
 | **Admin „Updates verfügbar“** | Teilweise (User-Klicks) | UI | Unverändert; P2+ **Systempflege** bündelt **Status**, ersetzt Adapter-Liste nicht |
 | **Stack Care (Manifest + UI)** | **Nein** | Empfehlung / Status | Veröffentlicht **was** zum Release gehört; **Orchestrierung** ruft bestehende Executor auf |
 
-**Docker vs. Host:** Auf dem **offiziellen Container-Pfad** ist Host-`iob nodejs-update` **falsch** (Node kommt mit dem Image). Full Updater und Stack-Runbooks adressieren **unterschiedliche Profile** – Supported Stack Care startet mit **buanet Docker** (§ 2.2, § 15).
+**Docker vs. Host:** Auf dem **offiziellen Container-Pfad** ist Host-`iob nodejs-update` **falsch** (Node kommt mit dem Image); auf dem **Installer-Pfad** ist es richtig. Stack Care ist **profilbasiert** (§ 9.9): `docker` und `debian-installer` sind gleichwertig. Welches Profil zuerst pilotiert wird, hängt von der Mitwirkung ab (Image-Pflege bzw. Core/Installer) – § 9.9.3 nennt Docker zuerst nur als **mögliche** Reihenfolge.
 
 **Forum-Lesart:** Wer „einfacher updaten“ sucht, findet oft **Skripte**. Stack Care beantwortet zusätzlich: *„Bin ich auf dem empfohlenen Stand – und welcher **nächste Schritt** gilt für **diesen** Release-Pfad?“*
 
@@ -454,8 +454,8 @@ Nutzer **ohne Docker-Wunsch** brauchen **kein zweites Image**, aber ein **eigene
 
 #### 9.9.3 Reihenfolge und Harmonie
 
-1. **Phase 1:** Docker-Profil + Abstimmung mit buanet (enger, viele Nutzer).
-2. **Phase 2:** Debian-Installer-Profil mit **gleicher** Release-ID (`2026-Q4-stable`), eigener Testmatrix.
+1. **Erstes Profil:** dasjenige, für das zuerst eine Zusage kommt – Docker (Abstimmung mit buanet; Basis schon gebündelt) **oder** Debian-Installer (Core; viele Bestandsinstallationen auf Raspberry/Debian).
+2. **Zweites Profil:** mit **gleicher** Release-ID (`2026-Q4-stable`), eigener Testmatrix.
 3. Admin zeigt erkanntes Profil und vergleicht mit passendem Manifest-Zweig.
 4. **Kein** Anspruch, dass Debian und Docker **identische** OS-Patches am gleichen Tag haben – Anspruch: **zum Release-Zeitpunkt getestete Kombination je Profil**.
 

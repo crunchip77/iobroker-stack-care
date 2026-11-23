@@ -99,7 +99,7 @@ Das ist **kein neues Problem** – es erklärt, warum Vorsicht angebracht ist.
 
 - **Organisatorisch** ungelöst ohne buanet/Core – wird wieder **Einzelprojekt**.
 - **Erwartungsmanagement:** „pflegefrei“ vs. „wartungsarm“ – bei Misserfolg mehr Frust.
-- **Zwei Profile** (Docker + Debian) **verdoppelt** Testaufwand – Phase 1 nur Docker sinnvoll.
+- **Zwei Profile** (Docker + Debian) **verdoppelt** Testaufwand – Pilot daher mit **einem** Profil (das, für das zuerst eine Zusage kommt).
 - **Host-Grenze** (Unraid, Synology): Assistent ohne Host-Helfer bleibt **geführt**, nicht magisch.
 - **GitHub/beta-Nutzer** fühlen sich „zweite Klasse“ – UI muss das **ehrlich** zeigen.
 - **KI-Hype:** Ablenkung, wenn Regelwerk noch fehlt.
@@ -219,7 +219,7 @@ Annahme: Freiwillige + bestehende Maintainer, keine Vollzeit-Stelle.
 2. **Gespräch buanet:** „Würdet ihr pro Image-Release einen **Stack-Absatz** + festes Tag mittragen?“ – **Ja/Nein** entscheidet Projekt.  
 3. **Gespräch Core:** „Reicht P1 ohne Code?“ / „Wer owned P2?“  
 4. **Raspberry-Lesson** explizit nennen: Nachfolge und Rhythmus **vor** großem Versprechen.  
-5. **Debian-Profil** erst nach **erfolgreichem** Docker-P1.  
+5. **Zweites Profil** (Docker bzw. Debian-Installer) erst nach **erfolgreichem** P1 im ersten.  
 6. **KI** im Forum nur als „später, Erklärung“.
 
 ---

@@ -54,7 +54,7 @@ Pull Requests willkommen; größere Richtungsänderungen bitte vorher kurz in ei
 | Phase | Inhalt |
 |-------|--------|
 | **P0** | RFC – dieses Repo |
-| **P1** | Image-Release mit Stack-Absatz, ohne neue Software |
+| **P1** | Stack-Absatz pro Release (Docker-Image bzw. Installer-Doku), ohne neue Software |
 | **P2a** | Notifications / Pflege-Hinweise bündeln (optional, vor vollem UI) |
 | **P2b** | Admin „Systempflege“: Manifest, vier Zustände (read-only) |
 | **P3+** | Assistent, BackItUp-Gate, Host-Schritte |

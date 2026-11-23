@@ -30,7 +30,7 @@
 
 **Neu:** Abstimmung, Manifest, Nutzersprache, Backup vor Gefährlichem als Ablauf, Governance.
 
-**Minimalstart (P1):** Ohne Core-Code – Release-Text + festes Tag + eine Upgrade-Story pro Image – um **Mitwirkung** zu testen, nicht gleich UI zu bauen.
+**Minimalstart (P1):** Ohne Core-Code – Release-Text + feste Versionen + eine Upgrade-Story pro Profil (Image-Release bzw. Installer-Doku) – um **Mitwirkung** zu testen, nicht gleich UI zu bauen.
 
 **Ohne Mitwirkung von Image-Pflege und Core:** bleibt Analyse – wie frühere Image-Projekte ohne Nachfolge.
 
@@ -39,10 +39,11 @@
 | **Stack Care ist …** | **Stack Care ist nicht …** |
 |----------------------|----------------------------|
 | Release-Orientierung: *welche Kombination* (Image-Tag, Policies, Reihenfolge) für einen **benannten** Supported-Pfad **empfohlen** ist | **Kein** neuer **Updater**, der Befehle **ausführt** (`apt`, `iobroker upgrade --all`, automatischer Docker-Pull) |
-| Abstimmung Image ↔ Core ↔ Community über **eine** Upgrade-Story pro Stack-Release (P1 zuerst als **Text** im Image-Release) | **Kein** Ersatz für **Full Updater**, **Ultimate Updater** oder eigene Host-Skripte – die pflegen weiterhin **den Host** bzw. führen Updates **dort** aus |
+| Abstimmung Image ↔ Core ↔ Community über **eine** Upgrade-Story pro Stack-Release (P1 zuerst als **Text** im Release bzw. in der Installer-Doku) | **Kein** Ersatz für **Full Updater**, **Ultimate Updater** oder eigene Host-Skripte – die führen Updates weiterhin **aus**; Stack Care kann ihnen sagen, **welcher** Stand empfohlen ist |
 | Perspektivisch (P2+): **eine** Admin-Antwort („Systempflege“, vier Zustände) statt Forenrecherche | **Kein** Versprechen, **jede** Installation (LXC, Proxmox, Synology, `latest`, Mischbetrieb) **voll** zu orchestrieren – nur **Supported** eng, Rest **Best effort** |
 | Nutzung **bestehender** Werkzeuge (`iobroker upgrade`, `maintenance`, BackItUp, Image-Pull) über **Runbooks** – nicht neues Backend | **Kein** offizielles ioBroker-Projekt **bis** Mitwirkung da ist – heute **RFC-Entwurf** zum Diskutieren |
-| | **Kein** „pflegefrei“ – Ziel ist **wartungsarm** mit Backup-Pflicht bei Majors |
+| Profilbasiert: **Docker-Image** (`docker`) und **Installer auf Debian/Raspberry** (`debian-installer`) sind gleichwertige Profile im selben Stack-Release | **Kein** „pflegefrei“ – Ziel ist **wartungsarm** mit Backup-Pflicht bei Majors |
+| | **Nicht** an Docker gebunden – welches Profil zuerst pilotiert wird, hängt davon ab, wer zuerst mitmacht (Image-Pflege oder Core/Installer) |
 
 **Merksatz für das Forum:** Stack Care **entscheidet und erklärt** (empfohlener Stack); bestehende Updater und CLI **führen aus**.
 
@@ -94,13 +95,13 @@ Im Forum laufen Diskussionen oft um **ausführende** Hilfen. Stack Care gehört 
 
 | Werkzeug | Was es tut | Typischer Nutzerkontext | Rolle von Stack Care |
 |----------|------------|-------------------------|----------------------|
-| **Full Updater** (Community-**Wartungsskript**, z. B. Thomas) | `apt` + `iob stop` + Node-Capabilities + `iobroker upgrade` auf **Bare-Metal-Debian** | Debian-Host, oft **ohne** Docker | Verweist im Runbook **wann** sinnvoll; **ersetzt** das Skript nicht |
+| **Full Updater** (Community-**Wartungsskript**, z. B. Thomas) | `apt` + `iob stop` + Node-Capabilities + `iobroker upgrade` auf **Bare-Metal-Debian** | Debian-Host, oft **ohne** Docker | Im Profil `debian-installer` ein möglicher **Ausführer**: Stack Care sagt, *welche* Kombination empfohlen ist, das Skript kann sie umsetzen – Partner, kein Konkurrent |
 | **Ultimate Updater** (Community) | Gebündelt Host/Container/apt/Adapter (z. B. Proxmox/LXC) | Eigene Homelab-Konstrukte | **Best effort**; eigene Doku – Stack Care verspricht hier **nichts** |
 | **`iobroker upgrade` / Admin-Adapter-Updates** | Controller- und Adapter-Updates **in** ioBroker | Überall | **Ausführung** – Teil jedes Stack-Runbooks |
 | **`maintenance` (offizielles Docker-Image)** | Controller-Upgrade **im Container** | Offizielles Image | **Ausführung** im Docker-Profil – Schritt in Release-Story |
 | **`iob nodejs-update`, `iob fix`, `iob diag`** | Node/Reparatur auf **Host-Pfad** (nicht Docker-intern) | Installer / Bare Metal | Runbook-Schritte, wenn Profil `debian-installer` |
 | **BackItUp** | Backup/Restore | Überall | **Gate** vor riskanten Schritten (P3) |
-| **Stack Care** | Empfohlene **Kombination** + Release-Text (P1); später Status vs. Manifest (P2) | Vor allem **offizielles Docker-Image** (Supported) | **Empfehlung & Orientierung** – führt selbst **keine** Updates aus |
+| **Stack Care** | Empfohlene **Kombination** + Release-Text (P1); später Status vs. Manifest (P2) | Supported-Profile: offizielles **Docker-Image** und **Installer auf Debian/Raspberry** | **Empfehlung & Orientierung** – führt selbst **keine** Updates aus |
 
 ---
 
@@ -131,7 +132,7 @@ flowchart TB
 | Element | Inhalt |
 |---------|--------|
 | **Stack-Release** | „Für Kanal `stable` gilt: Image-Tag X, Policies Y, Runbook Z“ – pro Release neu, keine starren Versionen im Konzept-PDF |
-| **Profile** | `docker` (buanet Pflicht) optional später `debian-installer` |
+| **Profile** | `docker` (offizielles Image, Mitwirkung Image-Pflege) und `debian-installer` (Installer/`iob`, Mitwirkung Core) – Pilot-Reihenfolge offen |
 | **Vier Zustände** | in Ordnung · unkritisch · Wartung · nicht supported |
 | **Adapter** | Auto auf `live` patch/minor; beta/GitHub ausgenommen (ehrlicher Status) |
 | **`iob`-Werkzeuge** | werden **aufgerufen**, nicht ersetzt (§ 14 Konzept) |
@@ -174,7 +175,10 @@ Jeder Nutzer „wartet“ selbst – unsichtbar, uneinheitlich, teuer im Forum.
 
 ### 6.3 Minimal verbindlich (P1)
 
-Pro Image-Release **ein** Absatz: empfohlenes Tag, Reihenfolge Backup → Adapter/Controller → ggf. recreate – **ohne** neue Software.
+Pro Release **ein** Absatz je Profil – **ohne** neue Software:
+
+- **Docker:** im Image-Release empfohlenes Tag, Reihenfolge Backup → Adapter/Controller → ggf. Container neu erstellen.
+- **Installer (Debian/Raspberry):** in der Installer-/Update-Doku empfohlene Node- und js-controller-Kombination, Reihenfolge Backup → `iob nodejs-update` → Controller → Adapter.
 
 ---
 
@@ -217,7 +221,7 @@ Pro Image-Release **ein** Absatz: empfohlenes Tag, Reihenfolge Backup → Adapte
 | Erwartung „pflegefrei“ | Formulierung „wartungsarm“, Supported begrenzt |
 | Watchtower + `latest` | Doku: abschalten |
 | Docker + `iob nodejs-update` Host | Runbook: Schritt entfällt |
-| Zwei Profile testen | Debian erst nach Docker-P1 |
+| Zwei Profile testen | Mit **einem** Profil pilotieren (das, für das zuerst eine Zusage kommt), das zweite danach |
 | Maintainer burn-out | kleines P1, feste Release-Routine |
 
 ---
@@ -254,8 +258,8 @@ Nein – gleiche Schritte, eingeordnet.
 1. **GitHub (P0):** RFC-Dokumente im öffentlichen Repo (ohne interne Antwort-Vorlagen).  
 2. **Anpassen:** Feedback über **Issues/Discussions** und/oder Forum-Thread einarbeiten.  
 3. **Forum:** Kurzpost + **Link** zum Repo (siehe Forum-Thread in README).  
-4. **Mitwirkung klären:** Ob **P1** (Stack-Absatz im Image-Release, festes Tag, eine Upgrade-Reihenfolge) realistisch ist, braucht **Image-Pflege** (und für P2+ **Core**). Feedback dazu gern per **GitHub Issues/Discussions** in diesem Repo, im verlinkten Forum-Thread oder **direkt** an die jeweiligen Maintainer – je nachdem, welcher Kanal bei euch üblich ist.  
-5. **Bei P1-Zusage:** ein konkretes Image-Release als Pilot + Erfolgskriterium (z. B. Stack-Absatz + Tester).  
+4. **Mitwirkung klären:** Ob **P1** (Stack-Absatz pro Release, feste Versionen, eine Upgrade-Reihenfolge) realistisch ist, braucht **Image-Pflege** (Profil Docker) bzw. **Core/Installer** (Profil Debian/Raspberry) – für P2+ in jedem Fall Core. Feedback dazu gern per **GitHub Issues/Discussions** in diesem Repo, im verlinkten Forum-Thread oder **direkt** an die jeweiligen Maintainer – je nachdem, welcher Kanal bei euch üblich ist.  
+5. **Bei P1-Zusage:** ein konkretes Release (Image oder Installer-Doku) als Pilot + Erfolgskriterium (z. B. Stack-Absatz + Tester).  
 6. **Ohne P1-Interesse:** Repo bleibt Analyse; kein großes Versprechen nach außen.
 
 **Hinweis für Image-Pflege und Core:** Dieser RFC verlangt **keine** Sofortumsetzung. P1 ist bewusst minimal (Release-Text, kein Core-Code). Eine kurze Rückmeldung *machbar / nicht geplant / später* reicht, damit die Community nicht mit falschen Erwartungen bleibt.
