@@ -1,5 +1,7 @@
 # ioBroker Stack Care (RFC-Entwurf)
 
+**Kein Updater, keine Ausführung:** Stack Care **empfiehlt** einen geprüften Stack-Release und soll später **Status** anzeigen – es führt **keine** `apt`-, Docker- oder `iobroker upgrade`-Läufe aus (dafür gibt es Image, CLI und Community-Skripte wie Full Updater).
+
 **Diskussionsentwurf** für ein verbindlicheres **Betriebsmodell** rund um Systempflege (Image, Node, js-controller, Adapter) – nicht ein neues Docker-Produkt, sondern eine Schicht aus **Stack-Releases**, klarer Nutzersprache und (perspektivisch) einer Admin-Ansicht „Systempflege“.
 
 > **Status (November 2026):** Diskussionsentwurf aus der Community-Runde – **nicht** offiziell von ioBroker, **keine** Produktzusage, **keine** Garantie auf Umsetzung. Marken „ioBroker“ gehören den jeweiligen Rechteinhabern.
@@ -53,7 +55,9 @@ Pull Requests willkommen; größere Richtungsänderungen bitte vorher kurz in ei
 |-------|--------|
 | **P0** | RFC – dieses Repo |
 | **P1** | Image-Release mit Stack-Absatz, ohne neue Software |
-| **P2+** | Admin liest Manifest, Assistent, Gates |
+| **P2a** | Notifications / Pflege-Hinweise bündeln (optional, vor vollem UI) |
+| **P2b** | Admin „Systempflege“: Manifest, vier Zustände (read-only) |
+| **P3+** | Assistent, BackItUp-Gate, Host-Schritte |
 
 Details: [Ausarbeitung §7](iobroker-stack-care-ausarbeitung.md#7-phasen--was-wann-sinnvoll-ist).
 

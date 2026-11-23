@@ -1,6 +1,6 @@
 # ioBroker Stack Care – Ausarbeitung (Argumentationsgrundlage)
 
-**Stand:** November 2026  
+**Stand:** 23. November 2026  
 **Status:** Entwurf zur Abstimmung – **noch keine** gemeinsame Entscheidung der Community, nichts Offizielles von ioBroker.  
 **Ziel:** Lesbar in 15–20 Minuten; zum **Argumentieren** mit Image-Pflege, Core und Forum.
 
@@ -20,7 +20,7 @@
 
 **Problem:** Viele Nutzer wollen mit ioBroker ihr Zuhause automatisieren, nicht Linux, Node, Docker-Tags und Update-Reihenfolgen pflegen. Die Hilfen (Doku, Forum, `iob fix`, Docker-Image) existieren einzeln – es fehlt ein **verbindliches Betriebsmodell**: *Ist meine Installation in Ordnung, und wenn nein, was ist genau der nächste Schritt?*
 
-**Vorschlag:** **Stack Care** – kein neues Produkt neben ioBroker, sondern eine **Schicht**:
+**Vorschlag:** **Stack Care** (*Untertitel: **empfohlener Stack / Release-Orientierung***) – kein neues Produkt neben ioBroker, sondern eine **Schicht**:
 
 - **Stack-Release:** geprüfte Kombination (z. B. offizielles Docker-Image-Tag + getestete Controller-/Adapter-Policies), veröffentlicht als klare Empfehlung.
 - **Admin „Systempflege“** (perspektivisch): wenige Zustände statt verstreuter Tabs und Forenrecherche.
@@ -33,6 +33,18 @@
 **Minimalstart (P1):** Ohne Core-Code – Release-Text + festes Tag + eine Upgrade-Story pro Image – um **Mitwirkung** zu testen, nicht gleich UI zu bauen.
 
 **Ohne Mitwirkung von Image-Pflege und Core:** bleibt Analyse – wie frühere Image-Projekte ohne Nachfolge.
+
+### 1.1 Was Stack Care **ist** – und was **nicht**
+
+| **Stack Care ist …** | **Stack Care ist nicht …** |
+|----------------------|----------------------------|
+| Release-Orientierung: *welche Kombination* (Image-Tag, Policies, Reihenfolge) für einen **benannten** Supported-Pfad **empfohlen** ist | **Kein** neuer **Updater**, der Befehle **ausführt** (`apt`, `iobroker upgrade --all`, automatischer Docker-Pull) |
+| Abstimmung Image ↔ Core ↔ Community über **eine** Upgrade-Story pro Stack-Release (P1 zuerst als **Text** im Image-Release) | **Kein** Ersatz für **Full Updater**, **Ultimate Updater** oder eigene Host-Skripte – die pflegen weiterhin **den Host** bzw. führen Updates **dort** aus |
+| Perspektivisch (P2+): **eine** Admin-Antwort („Systempflege“, vier Zustände) statt Forenrecherche | **Kein** Versprechen, **jede** Installation (LXC, Proxmox, Synology, `latest`, Mischbetrieb) **voll** zu orchestrieren – nur **Supported** eng, Rest **Best effort** |
+| Nutzung **bestehender** Werkzeuge (`iobroker upgrade`, `maintenance`, BackItUp, Image-Pull) über **Runbooks** – nicht neues Backend | **Kein** offizielles ioBroker-Projekt **bis** Mitwirkung da ist – heute **RFC-Entwurf** zum Diskutieren |
+| | **Kein** „pflegefrei“ – Ziel ist **wartungsarm** mit Backup-Pflicht bei Majors |
+
+**Merksatz für das Forum:** Stack Care **entscheidet und erklärt** (empfohlener Stack); bestehende Updater und CLI **führen aus**.
 
 ---
 
@@ -75,6 +87,20 @@ Andere Plattformen verkaufen **Onboarding + Systemwartung** als Produktwahrnehmu
 | **Image-Doku** | Tags, kein `latest` empfohlen |
 
 **Lücke:** Kein **gemeinsames Release-Versprechen** an den Nutzer und keine **eine** Oberflächen-Antwort.
+
+### 3.1 Ökosystem: Pflege-Werkzeuge (wer macht was?)
+
+Im Forum laufen Diskussionen oft um **ausführende** Hilfen. Stack Care gehört **nicht** in dieselbe Schublade – es ergänzt sie.
+
+| Werkzeug | Was es tut | Typischer Nutzerkontext | Rolle von Stack Care |
+|----------|------------|-------------------------|----------------------|
+| **Full Updater** (Community-**Wartungsskript**, z. B. Thomas) | `apt` + `iob stop` + Node-Capabilities + `iobroker upgrade` auf **Bare-Metal-Debian** | Debian-Host, oft **ohne** Docker | Verweist im Runbook **wann** sinnvoll; **ersetzt** das Skript nicht |
+| **Ultimate Updater** (Community) | Gebündelt Host/Container/apt/Adapter (z. B. Proxmox/LXC) | Eigene Homelab-Konstrukte | **Best effort**; eigene Doku – Stack Care verspricht hier **nichts** |
+| **`iobroker upgrade` / Admin-Adapter-Updates** | Controller- und Adapter-Updates **in** ioBroker | Überall | **Ausführung** – Teil jedes Stack-Runbooks |
+| **`maintenance` (offizielles Docker-Image)** | Controller-Upgrade **im Container** | Offizielles Image | **Ausführung** im Docker-Profil – Schritt in Release-Story |
+| **`iob nodejs-update`, `iob fix`, `iob diag`** | Node/Reparatur auf **Host-Pfad** (nicht Docker-intern) | Installer / Bare Metal | Runbook-Schritte, wenn Profil `debian-installer` |
+| **BackItUp** | Backup/Restore | Überall | **Gate** vor riskanten Schritten (P3) |
+| **Stack Care** | Empfohlene **Kombination** + Release-Text (P1); später Status vs. Manifest (P2) | Vor allem **offizielles Docker-Image** (Supported) | **Empfehlung & Orientierung** – führt selbst **keine** Updates aus |
 
 ---
 
@@ -157,12 +183,15 @@ Pro Image-Release **ein** Absatz: empfohlenes Tag, Reihenfolge Backup → Adapte
 | Phase | Ergebnis | Aufwand | Nutzen |
 |-------|-----------|---------|--------|
 | **P0** | RFC, dieses Papier | gering | Klarheit |
-| **P1** | Doku + Release-Story | gering | **Beweis Mitwirkung** |
-| **P2** | Admin liest Manifest, 4 Zustände | Core mittel | Sichtbarkeit |
-| **P3** | BackItUp-Gate, Assistent | Core hoch | Laien |
-| **P4** | Host recreate optional | heterogen | Komfort |
+| **P1** | Doku + Release-Story (Image: Stack-Absatz, festes Tag, **eine** Upgrade-Reihenfolge) – **ohne** Core-Code | gering | **Beweis Mitwirkung** |
+| **P2a** | Verständliche **Notifications** / Glocke: Pflege-Hinweise bündeln (z. B. „Backup alt“, optional später Host/OS-pending – **braucht** Host-Daten) | Core gering–mittel | Weniger versteckte Einzelmeldungen |
+| **P2b** | Admin **„Systempflege“** read-only: Manifest laden, Ist vs. Empfehlung, **4 Zustände**, Backup-Alter | Core mittel | Sichtbarkeit „empfohlener Stack“ |
+| **P3** | BackItUp-Gate, Wartungs-Assistent, sinnvolle Defaults (z. B. Auto-Adapter Nachts) | Core hoch | Laien bei Major |
+| **P4** | Host recreate optional, Migration-Hinweise | heterogen | Komfort |
 
-**Empfehlung:** Forum und Maintainer **erst** mit P0+P1 ansprechen; P2 erst nach Zusage.
+**Empfehlung:** Forum und Maintainer **erst** mit P0+P1 ansprechen. **P2b** (volles Manifest-UI) erst nach Zusage **und** geklärtem Manifest-Hosting; **P2a** kann **vor** P2b diskutiert werden (kleinerer Einstieg, kein vollständiges Stack-Manifest nötig).
+
+**Abgrenzung P2a vs. P2b:** P2a = **Hinweise** über bestehendes Notification-System; P2b = **eine Seite** mit Stack-Status gegen zentrales Manifest – beides ist **kein** Updater.
 
 ---
 
@@ -220,18 +249,16 @@ Nein – gleiche Schritte, eingeordnet.
 
 ## 11. Nächste Schritte (empfohlen)
 
-**Reihenfolge flexibel:** öffentlicher Start kann über **GitHub** laufen; Forum nur als kurzer Verweis. Privat-Mail an Image/Core **optional und zeitlich unabhängig**.
+**Reihenfolge flexibel:** öffentlicher Start kann über **GitHub** laufen; Forum nur als kurzer Verweis.
 
 1. **GitHub (P0):** RFC-Dokumente im öffentlichen Repo (ohne interne Antwort-Vorlagen).  
 2. **Anpassen:** Feedback über **Issues/Discussions** und/oder Forum-Thread einarbeiten.  
 3. **Forum:** Kurzpost + **Link** zum Repo (siehe Forum-Thread in README).  
-4. **Optional privat (nicht Voraussetzung):** Image-Pflege / Core ansprechen – **P1 Ja/Nein?** (siehe unten „Privat-Mail“).  
-5. **Bei P1-Ja:** ein konkretes Image-Release als Pilot + Erfolgskriterium (z. B. Stack-Absatz + Tester).  
-6. **Bei P1-Nein / kein Interesse:** Repo bleibt Analyse; kein großes Versprechen.
+4. **Mitwirkung klären:** Ob **P1** (Stack-Absatz im Image-Release, festes Tag, eine Upgrade-Reihenfolge) realistisch ist, braucht **Image-Pflege** (und für P2+ **Core**). Feedback dazu gern per **GitHub Issues/Discussions** in diesem Repo, im verlinkten Forum-Thread oder **direkt** an die jeweiligen Maintainer – je nachdem, welcher Kanal bei euch üblich ist.  
+5. **Bei P1-Zusage:** ein konkretes Image-Release als Pilot + Erfolgskriterium (z. B. Stack-Absatz + Tester).  
+6. **Ohne P1-Interesse:** Repo bleibt Analyse; kein großes Versprechen nach außen.
 
-### Privat-Mail an Image-Pflege – wofür?
-
-**Nicht** für die Community sichtbar. **Zweck:** vor oder parallel zum öffentlichen Diskurs **ohne Foren-Öffentlichkeit** klären, ob ein **Minimal-Pilot (P1)** realistisch ist: z. B. ein Absatz „empfohlener Stack“ pro Image-Release, festes Tag, eine Upgrade-Reihenfolge. Antworten *Ja / Nein / später* steuern, ob du im Forum **konkret nach Mitmachern** fragst oder nur das **Problem** validierst. Wenn du erst GitHub + Forum machst und Mail **Monate später** – völlig in Ordnung.
+**Hinweis für Image-Pflege und Core:** Dieser RFC verlangt **keine** Sofortumsetzung. P1 ist bewusst minimal (Release-Text, kein Core-Code). Eine kurze Rückmeldung *machbar / nicht geplant / später* reicht, damit die Community nicht mit falschen Erwartungen bleibt.
 
 ---
 

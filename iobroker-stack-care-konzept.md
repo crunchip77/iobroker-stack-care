@@ -1,6 +1,6 @@
 # ioBroker Stack Care – Konzept (User-first)
 
-**Stand:** November 2026  
+**Stand:** 23. November 2026  
 **Nicht Ziel:** Abdeckung aller möglichen Hostszenarien; nicht ein persönliches Homelab-Setup dokumentieren.  
 **Argumentation (vor Forum):** `iobroker-stack-care-ausarbeitung.md` – **zuerst lesen** für Überblick.  
 **Forum-Diskussion:** https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher  
@@ -203,6 +203,23 @@ flowchart LR
 
 Der User sieht nur **A**. **M** und **E** sind Maintainer-Verantwortung.
 
+### 4.5 Ökosystem: Pflege-Werkzeuge (Komplementär, kein Ersatz)
+
+Stack Care ist **kein zweites Update-Backend** (siehe § 4.3). In der Community existieren bereits **ausführende** Pflege-Hilfen – die bleiben gültig und werden **nicht** abgelöst.
+
+| Baustein | Führt Updates aus? | Ebene | Verhältnis zu Stack Care |
+|----------|---------------------|-------|---------------------------|
+| **Full Updater** (Wartungsskript) | Ja (`apt`, `iobroker upgrade`, …) | Host, v. a. Debian Bare Metal | Stack Care **empfiehlt** Reihenfolge/Release; Skript **bleibt** Ausführung auf dem Host |
+| **Ultimate Updater** | Ja (gebündelt, je nach Setup) | Host/VM/LXC | **Best effort** – kein Supported-Versprechen durch Stack Care |
+| **`iobroker upgrade` / js-controller** | Ja (Adapter/Controller) | ioBroker-Prozess | **Kern-Executor** in allen Runbooks |
+| **`maintenance` (Docker-Image)** | Ja (Controller im Container) | Container | Docker-Profil: fester Schritt in Stack-Release |
+| **Admin „Updates verfügbar“** | Teilweise (User-Klicks) | UI | Unverändert; P2+ **Systempflege** bündelt **Status**, ersetzt Adapter-Liste nicht |
+| **Stack Care (Manifest + UI)** | **Nein** | Empfehlung / Status | Veröffentlicht **was** zum Release gehört; **Orchestrierung** ruft bestehende Executor auf |
+
+**Docker vs. Host:** Auf dem **offiziellen Container-Pfad** ist Host-`iob nodejs-update` **falsch** (Node kommt mit dem Image). Full Updater und Stack-Runbooks adressieren **unterschiedliche Profile** – Supported Stack Care startet mit **buanet Docker** (§ 2.2, § 15).
+
+**Forum-Lesart:** Wer „einfacher updaten“ sucht, findet oft **Skripte**. Stack Care beantwortet zusätzlich: *„Bin ich auf dem empfohlenen Stand – und welcher **nächste Schritt** gilt für **diesen** Release-Pfad?“*
+
 ---
 
 ## 5. Stack-Manifest (Skizze)
@@ -256,10 +273,11 @@ Siehe auch **§ 9.9**.
 | Phase | Lieferumfang | User spürt |
 |-------|----------------|------------|
 | **P0 – Konzept & RFC** | Dieses Dokument, Schema Manifest, Abstimmung Core/Image | Noch nichts |
-| **P1 – Transparenz** | Admin zeigt Ist vs. Manifest, Backup-Alter, Zustand 1–4 (read-only wo nötig) | „Endlich sehe ich, ob ich was tun muss.“ |
-| **P2 – Innen-Automation** | Defaults, Auto-Adapter Nachts, Notifications verständlich | Weniger Klick-Arbeit im Alltag |
-| **P3 – Geführte Wartung** | Assistent für Controller/Basis inkl. BackItUp-Gate | Major ohne Forum-Recherche |
-| **P4 – Official Stack only UX** | Klare Migration-Hinweise, ein Installer-/Image-Pfad beworben | Weniger „ich wusste nicht, dass ich falsch installiert habe“ |
+| **P1 – Transparenz (Image)** | Release-Absatz „empfohlener Stack“, festes Tag, **eine** Upgrade-Story – **ohne** Core-Code | „Ich weiß, welches Tag und welche Reihenfolge gilt.“ |
+| **P2a – Hinweise** | Notifications/Glocke: Pflege-Hinweise verständlich bündeln (optional OS-pending – Host-Abfrage) | Weniger verstreute Einzelmeldungen |
+| **P2b – Systempflege read-only** | Admin: Manifest laden, Ist vs. Empfehlung, Zustand 1–4, Backup-Alter | „Bin ich auf dem empfohlenen Stack?“ |
+| **P3 – Geführte Wartung** | Assistent für Controller/Basis, BackItUp-Gate, Defaults/Auto-Adapter (Policy) | Major ohne Forum-Recherche |
+| **P4 – Official Stack only UX** | Klare Migration-Hinweise, Host recreate optional, ein Image-Pfad beworben | Weniger „ich wusste nicht, dass ich falsch installiert habe“ |
 
 Vollautomatik bei **Major** und Basiswechsel: nur nach Opt-in und erfolgreichem Backup – Default bleibt **geführt**.
 
@@ -562,13 +580,24 @@ Pro Freigabe eine Datei (z. B. auf `raw.githubusercontent.com`, ioBroker-Blog 
 
 **js-controller/Admin:** **keine Änderung** nötig für ersten Nutzen.
 
-### 12.2 Phase P2 – Admin read-only
+### 12.2 Phase P2 – zweistufig (P2a / P2b)
+
+**P2a – Notifications (kleiner Einstieg, kein vollständiges Manifest nötig)**
+
+| Komponente | Änderung | Aufwand (grob) |
+|------------|----------|----------------|
+| **Admin / js-controller** | Kategorie `stackMaintenance`, verständliche Texte, ggf. Bündelung vorhandener Hinweise (Backup alt, Controller …) | **Tage–2 Wochen** |
+| **Host (optional)** | Signal „OS-Updates pending“ – nur mit **expliziter** Host-Abfrage/Skript; nicht P1 | heterogen |
+
+**P2b – Admin „Systempflege“ read-only**
 
 | Komponente | Änderung | Aufwand (grob) |
 |------------|----------|----------------|
 | **Admin** | Tab „Systempflege“: Versionen lesen, Manifest-URL fetchen, 4 Zustände, Backup-Alter aus BackItUp-State | **2–6 Wochen** dev (1 Entwickler, je nach UI) |
 | **js-controller** | optional: Host-State `system.host.*.stack.*` befüllen; Message `getStackStatus` | **3–10 Tage** |
 | **Manifest-Hosting** | HTTPS, Versionierung, ETag | Image oder ioBroker-Org |
+
+P2a und P2b **führen keine Updates aus** – nur Anzeige und Hinweise.
 
 ### 12.3 Phase P3 – Gates + Assistent
 
