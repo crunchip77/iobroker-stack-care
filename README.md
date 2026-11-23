@@ -1,74 +1,91 @@
-# ioBroker Stack Care (RFC-Entwurf)
+# Systempflege für Normalnutzer – Vorschläge aus dem Forum
 
-**Kein Updater, keine Ausführung:** Stack Care **empfiehlt** einen geprüften Stack-Release und soll später **Status** anzeigen – es führt **keine** `apt`-, Docker- oder `iobroker upgrade`-Läufe aus (dafür gibt es Image, CLI und Community-Skripte wie Full Updater).
+Zusammenfassung der Diskussion im ioBroker-Forum: [Updates & Systempflege – geht das für Normalnutzer einfacher?](https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher)
 
-**Diskussionsentwurf** für ein verbindlicheres **Betriebsmodell** rund um Systempflege (Image, Node, js-controller, Adapter) – nicht ein neues Docker-Produkt, sondern eine Schicht aus **Stack-Releases**, klarer Nutzersprache und (perspektivisch) einer Admin-Ansicht „Systempflege“.
+> **Stand:** 23. November 2026 – die Diskussion läuft noch. Privat zusammengestellt, nichts Offizielles von ioBroker. Gedacht als Grundlage, falls die Punkte z. B. im Dev-Meeting besprochen werden.
 
-> **Status (November 2026):** Diskussionsentwurf aus der Community-Runde – **nicht** offiziell von ioBroker, **keine** Produktzusage, **keine** Garantie auf Umsetzung. Marken „ioBroker“ gehören den jeweiligen Rechteinhabern.
+## Worum es geht
 
-**Sichtbarkeit:** Dieses Repository ist **öffentlich** (GitHub Public), damit Forum, Image-Pflege und Core alles ohne Zugang lesen können. Nur **credentials, private Mails oder interne Notizen** gehören nicht ins Repo (siehe [CONTRIBUTING.md](CONTRIBUTING.md)).
+Viele Nutzer wollen ihr Haus automatisieren, müssen sich aber nebenbei um Betriebssystem, Node.js, js-controller und Adapter kümmern. Im Thread hat sich gezeigt: ioBroker bringt dafür schon einiges mit (Updates und Controller-Upgrade aus dem Admin, automatische Adapter-Updates, Hinweise auf OS-Updates und Neustart in der Glocke, eine empfohlene Node-Version im Repository). Vieles ist aber verstreut oder nur im Terminal sichtbar, z. B. über `iob diag`.
 
----
+Ein kuratiertes Gesamt-Release wie bei Debian oder Home Assistant passt nicht zu ioBroker, weil die Adapter bewusst unabhängig sind. Die Vorschläge unten bauen deshalb auf vorhandenen Teilen auf.
 
-## Kurzfassung
+## Vorschläge
 
-Viele Nutzer wollen automatisieren, nicht dauernd Linux/Node/Docker pflegen. Bausteine (offizielles Image, `iob fix`, BackItUp, Admin) gibt es – es fehlt oft ein **gemeinsames Release-Versprechen** und **eine Antwort**: *Ist meine Installation in Ordnung – und wenn nicht, was ist der nächste Schritt?*
+### 1. Ergebnis von `iob diag` im Admin anzeigen
 
-**Stack Care** schlägt vor, **klein mit P1** zu beginnen (Release-Text + festes Tag + Upgrade-Story, ohne Core-Code) und UX **erst nach** Mitwirkung von Image-Pflege und Core zu bauen.
+**Heute:** `iob diag` prüft schon vieles und markiert es farbig: Ausführung als root, 32-Bit-System, Abweichung von der empfohlenen Node-Hauptversion, nicht mehr unterstütztes OS (über `distro-info`), Vorabversionen von Node oder js-controller. In der nächsten Version kommen weitere Bereiche dazu, z. B. ein leeres Backup-Verzeichnis. Sichtbar ist das aber nur, wenn man `iob diag` im Terminal aufruft.
 
----
+**Vorschlag:** Diese Ampel im Admin anzeigen, prominent, aber ohne dass man sie ständig wegklicken muss. Die Regeln müssen nicht neu definiert werden, sie werden in `iob diag` schon gepflegt.
 
-## Einstieg lesen
+**Aus dem Thread:** Thomas Braun ([#52](https://forum.iobroker.net/post/1364694), [#30](https://forum.iobroker.net/post/1364633)), mcm1957: umsetzbar, wenn die Regeln definierbar sind ([#46](https://forum.iobroker.net/post/1364687)), OliverIO: prominent, ohne wiederholtes Wegklicken ([#44](https://forum.iobroker.net/post/1364684))
 
-| Zuerst | Inhalt |
-|--------|--------|
-| **[Ausarbeitung](iobroker-stack-care-ausarbeitung.md)** | Argumentation in ~15–20 Minuten – **hier starten** |
-| [Review](iobroker-stack-care-review.md) | Sinn, Aufwand, Image-Historie |
-| [Konzept](iobroker-stack-care-konzept.md) | Vollständige Spezifikation (§ 1–15) |
+**Status:** offen
 
----
+Zwei Teile davon sind schon als Issue eingetragen:
 
-## Weitere Dokumente
+- **Node-Version nicht mehr empfohlen:** Das Repository nennt `nodeJsRecommended`, der Admin schreibt `versions.nodeNewestNext` in die Host-Datenpunkte, eine Meldung gibt es aber nicht. Vorschlag: wiederkehrende Erinnerung plus Log-Eintrag, kein hartes Abschalten. Bei Docker Hinweis auf ein neues Image statt `iobroker nodejs-update`. → [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746), unterstützt von mcm1957 ([#34](https://forum.iobroker.net/post/1364641))
+- **OS-Version läuft aus:** Es gibt eine Meldung für Paket-Updates, aber keine, wenn die Debian-Version selbst ausläuft. → [ioBroker.admin #3535](https://github.com/ioBroker/ioBroker.admin/issues/3535) (von mcm1957), ergänzt um den Hinweis auf `distro-info` von Thomas Braun ([#30](https://forum.iobroker.net/post/1364633))
 
-| Datei | Für wen |
-|--------|---------|
-| [Admin-Mockup](iobroker-stack-care-admin-mockup.md) | Optional: UI-Skizze für Phase P2 |
-| [Manifest-Beispiel](examples/manifest-stable.example.json) | Struktur P2+ (Platzhalter) |
+### 2. Große Versionssprünge in der Glocke kennzeichnen
 
-Forum-Kurztext nur im [ioBroker-Forum-Thread](https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher) – nicht als Duplikat im Repo.
+**Heute:** Die Meldung „Adapter-Updates verfügbar“ ist eine einfache Liste. Ein Major-Update (z. B. BackItUp 4 → 5) steht genauso drin wie ein kleiner Patch. Nur der js-controller bekommt einen eigenen Text.
 
----
+**Vorschlag:** Major-Updates markieren und darauf hinweisen, vorher den Changelog zu lesen.
 
-## Feedback
+**Aus dem Thread:** Vorschlag von mcm1957 ([#43](https://forum.iobroker.net/post/1364681))
 
-- **ioBroker-Forum:** https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher  
-- **[Discussions](https://github.com/crunchip77/iobroker-stack-care/discussions/1)** – GitHub-Diskussion (RFC-Feedback)  
-- **[Issues](https://github.com/crunchip77/iobroker-stack-care/issues)** – konkrete Punkte (Labels: `feedback`, `p1-pilot`)  
+**Status:** offen, Issue geplant
 
-Pull Requests willkommen; größere Richtungsänderungen bitte vorher kurz in einer Discussion oder einem Issue skizzieren.
+### 3. Backup vor dem Controller-Update per Knopf
 
----
+**Heute:** Der Admin-Dialog zum Controller-Update empfiehlt `iob backup` als ersten Schritt, aber nur in der Anleitung fürs Terminal. Wer das Update per Knopf im Admin startet, bekommt keine Sicherung, der Upgrade-Prozess des js-controllers enthält keinen Backup-Schritt. Automatisch gesichert werden sonst nur Objekte und States (bei der Standard-Datenbank jsonl alle 2 Stunden, bei Redis nicht).
 
-## Phasen (Kurz)
+**Vorschlag:** Vor dem Update per Knopf anbieten, `iob backup` auszuführen. Einrichten muss der Nutzer dafür nichts, der Befehl ist eingebaut.
 
-| Phase | Inhalt |
-|-------|--------|
-| **P0** | RFC – dieses Repo |
-| **P1** | Stack-Absatz pro Release (Docker-Image bzw. Installer-Doku), ohne neue Software |
-| **P2a** | Notifications / Pflege-Hinweise bündeln (optional, vor vollem UI) |
-| **P2b** | Admin „Systempflege“: Manifest, vier Zustände (read-only) |
-| **P3+** | Assistent, BackItUp-Gate, Host-Schritte |
+**Aus dem Thread:** mcm1957 ([#43](https://forum.iobroker.net/post/1364681)), OliverIO ([#44](https://forum.iobroker.net/post/1364684))
 
-Details: [Ausarbeitung §7](iobroker-stack-care-ausarbeitung.md#7-phasen--was-wann-sinnvoll-ist).
+**Status:** offen, Issue geplant
 
----
+### 4. Planbare Node-Empfehlung
 
-## Risiken (v1)
+**Heute:** Die empfohlene Node-Version ändert sich „irgendwann, wenn das Bauchgefühl sagt, es ist langsam an der Zeit“.
 
-Docker-Pfad: kein blindes `latest`, Watchtower abschalten, kein Host-`iob nodejs-update` statt Image-Tag, Backup vor riskanten Schritten. Siehe [Konzept §15](iobroker-stack-care-konzept.md), [Review](iobroker-stack-care-review.md).
+**Vorschlag:** Die Empfehlung an den Release-Plan von Node.js koppeln, z. B. immer zum gleichen Zeitpunkt im Jahr. Adapter-Entwickler und Nutzer könnten den Wechsel dann einplanen. Ausdrücklich als Empfehlung, nicht als Pflicht.
 
----
+**Aus dem Thread:** Thomas Braun ([#32](https://forum.iobroker.net/post/1364638)), mcm1957 einverstanden, solange es eine Empfehlung bleibt ([#39](https://forum.iobroker.net/post/1364659))
+
+**Status:** offen
+
+### 5. Ablauf der Releases in der Doku beschreiben
+
+**Heute:** Für den js-controller gibt es im Forum Ankündigungen wie „jetzt für alle User im STABLE“, für Adapter legt ein Automatismus ein Issue an, wenn eine Version reif für stable ist. Nachlesen kann man den Ablauf aber nirgends.
+
+**Vorschlag:** Eine Seite „Releases“ in der Doku: wie js-controller und Admin von beta nach stable kommen, ungefähre Mindestzeit, wo angekündigt wird. Für Adapter eine kurze Beschreibung des Wegs von latest nach stable bzw. eine Empfehlung im README-Template.
+
+**Aus dem Thread:** OliverIO ([#42](https://forum.iobroker.net/post/1364680), [#49](https://forum.iobroker.net/post/1364691))
+
+**Status:** offen
+
+### 6. Widerspruch in der Update-Doku beheben
+
+**Heute:** [Updaten](https://www.iobroker.com/docs/install/update.md) nennt die Reihenfolge Adapter → js-controller → Node.js, [Updates einspielen](https://www.iobroker.com/docs/tutorial/updates.md) genau umgekehrt. Docker kommt auf beiden Seiten nicht vor.
+
+**Status:** → [ioBroker.docs #1013](https://github.com/ioBroker/ioBroker.docs/issues/1013)
+
+## Bewusst nicht weiterverfolgt
+
+| Idee | Warum nicht |
+|------|-------------|
+| Kuratiertes Gesamt-Release (wie Debian oder Home Assistant) | Adapter sind bewusst unabhängig, zu viel „Wildwuchs“, den man nicht beeinflussen kann – Thomas Braun ([#28](https://forum.iobroker.net/post/1364616)) |
+| Fester Release-Rhythmus | Bei Freiwilligen kann niemand Termine garantieren – mcm1957 ([#43](https://forum.iobroker.net/post/1364681)). Besser: angekündigter Termin mit Vorlauf, siehe Punkt 5 |
+| Reparaturen-Seite wie bei Home Assistant | Müsste von jedem Adapter-Entwickler umgesetzt werden – mcm1957 ([#43](https://forum.iobroker.net/post/1364681)), OliverIO ([#44](https://forum.iobroker.net/post/1364684)) |
+| Abkündigungen mit Datum | Für js-controller und Admin denkbar, im Auge behalten – mcm1957 ([#43](https://forum.iobroker.net/post/1364681)) |
+
+## Herkunft
+
+Ursprünglich stand hier der Entwurf „Stack Care“, ein Konzept für versionierte Gesamt-Releases und eine eigene Admin-Seite „Systempflege“. Im Thread hat sich gezeigt, dass das nicht zu ioBroker passt und vieles schon vorhanden ist. Der alte Entwurf liegt unter [`archiv/`](archiv/).
 
 ## Lizenz
 
-Texte und Beispiele: [CC BY-SA 4.0](LICENSE) – Weitergabe mit Namensnennung; Bearbeitungen unter gleicher Lizenz.
+Texte: [CC BY-SA 4.0](LICENSE)

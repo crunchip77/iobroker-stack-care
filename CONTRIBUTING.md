@@ -1,10 +1,10 @@
 # Mitmachen
 
-Dieses Repository ist eine **Diskussionsvorlage** (RFC), kein offizielles ioBroker-Projekt.
+Dieses Repository fasst Vorschläge aus einer Forum-Diskussion zusammen, kein offizielles ioBroker-Projekt.
 
 ## Feedback
 
-- **Diskussion / Meinung:** [Discussions](https://github.com/crunchip77/iobroker-stack-care/discussions).
+- **Diskussion / Meinung:** [Discussions](https://github.com/crunchip77/iobroker-systempflege/discussions).
 - **Kleine Korrekturen** (Tippfehler, Klarheit): Pull Request oder Issue (Label `feedback`).
 - **Inhaltliche Richtungsänderung:** Discussion oder Issue mit Kurzbegründung – dann PR oder Kommentar im Forum-Thread (falls verlinkt).
 
