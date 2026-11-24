@@ -20,7 +20,7 @@ Ein kuratiertes Gesamt-Release wie bei Debian oder Home Assistant passt nicht zu
 | Warnung vor Major-Update (Punkt 2) | Issue da | [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161). Markierung in der Glocke wäre nur eine Ergänzung dazu |
 | Letztes Backup anzeigen, Backup vor Update, Hinweis „nur lokal“ (Punkt 3) | Issue da | [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), Kommentar zur Übersicht und zum zweiten Speicherort |
 | Vorherige Adapter-Version markieren, Rückweg ohne Expertenmodus (Punkt 7) | Issue da | [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), Kommentar: Dialog nach fehlgeschlagenem Start auch ohne Expertenmodus |
-| Adapter-Update braucht neuere Node (Punkt 10) | Issue da | [ioBroker.admin #3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) |
+| Adapter braucht neuere Node, Plus installiert trotzdem (Punkt 10) | Bug-Issue da | Bei Updates zeigt der Admin schon rot und installiert nicht. Bei Neuinstallation per **+** (auch Kachelmodus) läuft npm und bricht mit exit 25 ab. → [ioBroker.admin #3753](https://github.com/ioBroker/ioBroker.admin/issues/3753). [#3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) war das Enhancement „Update nicht anbieten“, das trifft so nicht; dort nur noch Doku-Link/Icon offen |
 | Docker: Image-Tag statt `latest` (Punkt 8) | Issue da | [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016). Glocke hat schon `dockerUpdate` |
 | Eine Übersicht statt vier Stellen (Teil von Punkt 1) | an vorhandene Issues gehängt | Kommentare an [#3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), [#1914](https://github.com/ioBroker/ioBroker.admin/issues/1914), [#3746](https://github.com/ioBroker/ioBroker.admin/issues/3746) |
 | Major-Updates in der Liste/Glocke gruppieren (Punkt 2) | an vorhandenes Issue gehängt | Kommentar an [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) |
@@ -122,13 +122,13 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 Siehe Punkt 2. Nur die Liste/Glocke, nicht der Bestätigungsdialog – der liegt schon in [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161).
 
-### 10. Adapter-Update braucht neuere Node.js
+### 10. Adapter braucht neuere Node.js – Plus installiert trotzdem
 
-**Heute:** Die Doku erklärt seit #1013, was man tun soll, wenn ein Adapter schon eine neuere Node-Version verlangt. Im Admin kann das Update trotzdem wie ein normales Update aussehen.
+**Heute:** Die Doku erklärt seit #1013, was man tun soll, wenn ein Adapter schon eine neuere Node-Version verlangt. **Updates:** Der Admin zeigt die Version rot und installiert über diesen Weg nicht (Tooltip mit der fehlenden Abhängigkeit). **Neuinstallation:** Das Plus in der Adapterliste (und die Installation im Kachelmodus) prüft Node nicht, nur das Betriebssystem. Die Installation läuft, npm bricht mit exit 25 ab. Nachgestellt auf einem Testhost (Admin 8.3.15, js-controller 7.2.5, Node 22, Adapter aus latest mit `>= 24`).
 
-**Vorschlag:** Solche Updates nicht als normalen Ein-Klick-Update anbieten (ausgrauen oder erklären): Adapter braucht Node x, Host hat y, entweder Node zuerst oder eine passende ältere Adapterversion.
+**Vorschlag:** Plus nicht durchlassen, wenn `common.node` nicht passt, in der Zeilen- und in der Kachelansicht gleich. Updates nicht verstecken, die rote Anzeige reicht dort.
 
-**Status:** → [ioBroker.admin #3752](https://github.com/ioBroker/ioBroker.admin/issues/3752)
+**Status:** Bug → [ioBroker.admin #3753](https://github.com/ioBroker/ioBroker.admin/issues/3753). Das ältere Enhancement [#3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) (Update ausgrauen) trifft so nicht; mcm1957 will die Updates weiter sehen. Dort höchstens noch Doku-Link oder deutlicheres Icon.
 
 ## Gesehen bei Home Assistant (noch nicht diskutiert)
 
