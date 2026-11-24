@@ -18,8 +18,12 @@ Ein kuratiertes Gesamt-Release wie bei Debian oder Home Assistant passt nicht zu
 | Node nicht mehr empfohlen (Teil von Punkt 1) | Issue da, PR offen | [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746), [PR #3747](https://github.com/ioBroker/ioBroker.admin/pull/3747) noch nicht gemergt |
 | OS-Version läuft aus (Teil von Punkt 1) | Issue da, noch nicht umgesetzt | [ioBroker.admin #3535](https://github.com/ioBroker/ioBroker.admin/issues/3535), Bluefox schlägt lokale Prüfung im js-controller vor |
 | Warnung vor Major-Update (Punkt 2) | Issue da | [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161). Markierung in der Glocke wäre nur eine Ergänzung dazu |
-| Letztes Backup anzeigen, Backup vor Update (Punkt 3) | Issue da | [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), auf Wunsch von mcm1957 |
-| Vorherige Adapter-Version markieren | Issue da | [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), Idee von mcm1957 |
+| Letztes Backup anzeigen, Backup vor Update, Hinweis „nur lokal“ (Punkt 3) | Issue da | [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), Kommentar zur Übersicht und zum zweiten Speicherort |
+| Vorherige Adapter-Version markieren, Rückweg ohne Expertenmodus (Punkt 7) | Issue da | [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), Kommentar: Dialog nach fehlgeschlagenem Start auch ohne Expertenmodus |
+| Adapter-Update braucht neuere Node (Punkt 10) | Issue da | [ioBroker.admin #3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) |
+| Docker: Image-Tag statt `latest` (Punkt 8) | Issue da | [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016). Glocke hat schon `dockerUpdate` |
+| Eine Übersicht statt vier Stellen (Teil von Punkt 1) | an vorhandene Issues gehängt | Kommentare an [#3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), [#1914](https://github.com/ioBroker/ioBroker.admin/issues/1914), [#3746](https://github.com/ioBroker/ioBroker.admin/issues/3746) |
+| Major-Updates in der Liste/Glocke gruppieren (Punkt 2) | an vorhandenes Issue gehängt | Kommentar an [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) |
 | `iob diag` in der Kachel „Systemstatus“ (Punkt 1) | ausstehend | Node und OS haben schon Issues, der Rest (root, 32 Bit, Vorabversionen, leeres Backup-Verzeichnis, ausdrückliches „alles in Ordnung“) nicht. Kachel prüft heute nur, ob der Host antwortet |
 | Planbare Node-Empfehlung (Punkt 4) | ausstehend, eher Dev-Meeting | Thomas Braun vorgeschlagen, mcm1957 einverstanden als Empfehlung. Kein Code, sondern Absprache |
 | Ablauf der Releases in der Doku (Punkt 5) | ausstehend, eher Dev-Meeting | Vorschlag von OliverIO, gehört ins Docs-Repo |
@@ -36,6 +40,8 @@ Ein kuratiertes Gesamt-Release wie bei Debian oder Home Assistant passt nicht zu
 Die Übersicht im Admin hat schon eine Kachel „Systemstatus – OK – ioBroker läuft stabil“. Sie zeigt aber nur, ob der Host antwortet (`system.host.<host>.alive`), und steht deshalb auch auf OK, wenn Node veraltet ist oder lange kein Backup lief.
 
 **Vorschlag:** Diese Ampel im Admin anzeigen, prominent, aber ohne dass man sie ständig wegklicken muss, z. B. in der vorhandenen Kachel „Systemstatus“. Die Regeln müssen nicht neu definiert werden, sie werden in `iob diag` schon gepflegt.
+
+Dazu gehört, die verstreuten Infos an einer Stelle zu sammeln. Heute liegen letztes Backup, freier Speicher, neuer js-controller, Adapter-Updates und die Glocke auf verschiedenen Seiten. Die Übersicht kann das aufnehmen, ohne eine neue Seite: Systemstatus (dieser Punkt), letztes Backup ([#3750](https://github.com/ioBroker/ioBroker.admin/issues/3750)), sichtbares Controller-Update ([#1914](https://github.com/ioBroker/ioBroker.admin/issues/1914)). Kommentare dazu an den drei Issues.
 
 **Aus dem Thread:** Thomas Braun ([#53](https://forum.iobroker.net/post/1364694), [#31](https://forum.iobroker.net/post/1364633)), mcm1957: umsetzbar, wenn die Regeln definierbar sind ([#47](https://forum.iobroker.net/post/1364687)), OliverIO: prominent, ohne wiederholtes Wegklicken ([#45](https://forum.iobroker.net/post/1364684))
 
@@ -56,7 +62,7 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Aus dem Thread:** Vorschlag von mcm1957 ([#44](https://forum.iobroker.net/post/1364681))
 
-**Status:** Gibt es schon als Issue: [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) (Garfonso, offen). Dort geht es um eine Warnung mit Bestätigung vor einem Major-Update im Admin, auf der Kommandozeile gibt es die schon. Die Markierung in der Glocke wäre eine Ergänzung dazu.
+**Status:** Gibt es schon als Issue: [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) (Garfonso, offen). Dort geht es um eine Warnung mit Bestätigung vor einem Major-Update im Admin, auf der Kommandozeile gibt es die schon. Ergänzung als Kommentar dort: Major-Updates in der Update-Liste und in der Glocke markieren oder gruppieren, damit ein Sprung wie 4→5 nicht zwischen 40 Patches untergeht.
 
 ### 3. Backup vor dem Controller-Update per Knopf
 
@@ -66,7 +72,7 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Aus dem Thread:** mcm1957 ([#44](https://forum.iobroker.net/post/1364681)), OliverIO ([#45](https://forum.iobroker.net/post/1364684))
 
-**Status:** → [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750) (letztes Backup im Update-Dialog und in der Übersicht anzeigen, Backup vor dem Update anbieten). mcm1957 hat darum gebeten ([#56](https://forum.iobroker.net/post/1364786))
+**Status:** → [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750) (letztes Backup im Update-Dialog und in der Übersicht anzeigen, Backup vor dem Update anbieten). mcm1957 hat darum gebeten ([#56](https://forum.iobroker.net/post/1364786)). Kommentar dort: Hinweis, wenn das Backup nur auf demselben Gerät liegt (BackItUp sichert ab Werk lokal, `iob backup` ebenfalls).
 
 **Verwandt:** [ioBroker.admin #1914](https://github.com/ioBroker/ioBroker.admin/issues/1914) – ein verfügbares js-controller-Update auffälliger im Admin anzeigen
 
@@ -94,7 +100,35 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Vorher:** [Updaten](https://www.iobroker.com/docs/install/update.md) nannte die Reihenfolge Adapter → js-controller → Node.js, [Updates einspielen](https://www.iobroker.com/docs/tutorial/updates.md) genau umgekehrt. Docker kam auf beiden Seiten nicht vor.
 
-**Status:** erledigt → [ioBroker.docs #1013](https://github.com/ioBroker/ioBroker.docs/issues/1013), behoben mit [PR #1014](https://github.com/ioBroker/ioBroker.docs/pull/1014) (gemergt am 23.11.2026). Beide Seiten nennen jetzt Adapter → js-controller → Node.js. Neu dazugekommen sind ein Hinweis für Docker (neues Image statt `iobroker nodejs-update` bzw. `apt`) und, auf Anregung von mcm1957 im Issue, ein Abschnitt für den Fall, dass ein Adapter schon eine neuere Node-Version verlangt.
+**Status:** erledigt → [ioBroker.docs #1013](https://github.com/ioBroker/ioBroker.docs/issues/1013), behoben mit [PR #1014](https://github.com/ioBroker/ioBroker.docs/pull/1014) (gemergt am 23.11.2026). Beide Seiten nennen jetzt Adapter → js-controller → Node.js. Neu dazugekommen sind ein Hinweis für Docker (neues Image statt `iobroker nodejs-update` bzw. `apt`) und, auf Anregung von mcm1957 im Issue, ein Abschnitt für den Fall, dass ein Adapter schon eine neuere Node-Version verlangt. Was im Admin daraus folgt, steht unter Punkt 10. Was beim Docker-Weg noch fehlt, unter Punkt 8.
+
+### 7. Rückweg nach einem Adapter-Update
+
+**Heute:** Absturzschleifen werden gestoppt und in der Glocke gemeldet. Eine ältere Version installiert man nur im Expertenmodus. Die vorher installierte Version merkt sich der Admin nicht.
+
+**Vorschlag:** Nach dem Update kurz sagen, ob die Instanz wieder läuft. Wenn nicht: vorherige Version nennen und den Dialog „bestimmte Version installieren“ anbieten, auch ohne Expertenmodus. Der Code kommt zurück, Objekte und States nicht – das muss im Dialog stehen.
+
+**Status:** an [#3751](https://github.com/ioBroker/ioBroker.admin/issues/3751) als Kommentar gehängt (Markierung der vorherigen Version plus Dialog ohne Expertenmodus nach fehlgeschlagenem Start)
+
+### 8. Docker: Image-Tag statt `latest`
+
+**Heute:** Die Glocke kann `dockerUpdate` melden, wenn ein neues offizielles Image da ist. Die Doku sagt seit #1013, dass Node und OS mit dem Image kommen. Viele Compose-Dateien nutzen trotzdem `latest`. Dann ist unklar, auf welchem Stand man ist, und zurück geht schwer.
+
+**Vorschlag:** In der Doku die Schritte festhalten: Tag pinnen, neues Image ziehen, Container neu anlegen (Daten im Volume bleiben). In der Übersicht oder in der Glocke den aktuellen und den neuen Tag nennen, wenn die Meldung schon kommt.
+
+**Status:** → [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016)
+
+### 9. Adapter-Updates nach Größe gruppieren
+
+Siehe Punkt 2. Nur die Liste/Glocke, nicht der Bestätigungsdialog – der liegt schon in [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161).
+
+### 10. Adapter-Update braucht neuere Node.js
+
+**Heute:** Die Doku erklärt seit #1013, was man tun soll, wenn ein Adapter schon eine neuere Node-Version verlangt. Im Admin kann das Update trotzdem wie ein normales Update aussehen.
+
+**Vorschlag:** Solche Updates nicht als normalen Ein-Klick-Update anbieten (ausgrauen oder erklären): Adapter braucht Node x, Host hat y, entweder Node zuerst oder eine passende ältere Adapterversion.
+
+**Status:** → [ioBroker.admin #3752](https://github.com/ioBroker/ioBroker.admin/issues/3752)
 
 ## Gesehen bei Home Assistant (noch nicht diskutiert)
 
