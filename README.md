@@ -49,7 +49,7 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Aus dem Thread:** mcm1957 ([#44](https://forum.iobroker.net/post/1364681)), OliverIO ([#45](https://forum.iobroker.net/post/1364684))
 
-**Status:** offen, bisher kein Issue dazu gefunden (weder beim Admin noch beim js-controller)
+**Status:** offen, bisher kein Issue dazu gefunden (weder beim Admin noch beim js-controller). Issue in Vorbereitung, zusammen mit der Anzeige des letzten Backups, mcm1957 hat darum gebeten ([#56](https://forum.iobroker.net/post/1364786))
 
 **Verwandt:** [ioBroker.admin #1914](https://github.com/ioBroker/ioBroker.admin/issues/1914) – ein verfügbares js-controller-Update auffälliger im Admin anzeigen
 
@@ -87,18 +87,18 @@ Was HA anders macht:
 
 | Bei Home Assistant | Bei ioBroker heute |
 |------|-------------|
-| Im Update-Dialog steht „Letztes automatisches Backup vor 6 Stunden“, daneben ein Schalter „Automatisches Backup vor dem Update“ (Voreinstellung wählbar, pro Update änderbar) | BackItUp kennt das letzte Backup (`backitup.0.history.iobrokerLastTime`), im Update-Dialog wird es nicht angezeigt. Siehe auch Punkt 3 |
-| Bei App-Updates „Backup der letzten Version behalten“ als Rückweg per Knopf | Zurück nur über den Expertenmodus („bestimmte Version installieren“). Verwandt, aber nicht dasselbe: [ioBroker.admin #2973](https://github.com/ioBroker/ioBroker.admin/issues/2973) (Downgrade auf die Version im Repository, z. B. nach Wechsel von latest auf stable) |
-| Startet HA nach einem Core-Update nicht, spielt der Supervisor die alte Version zurück, sichert das Log und meldet das | Das Controller-Update per Knopf stoppt den Controller, installiert und startet neu. Ein Fehler wird gemeldet, ein Rücksprung auf die alte Version passiert nicht |
+| Im Update-Dialog steht „Letztes automatisches Backup vor 6 Stunden“, daneben ein Schalter „Automatisches Backup vor dem Update“ (Voreinstellung wählbar, pro Update änderbar) | BackItUp kennt das letzte Backup (`backitup.0.history.iobrokerLastTime`), im Update-Dialog wird es nicht angezeigt. Siehe auch Punkt 3. mcm1957: „wäre ein Issue wert“, der Admin kann BackItUp abfragen ([#56](https://forum.iobroker.net/post/1364786)) |
+| Bei App-Updates „Backup der letzten Version behalten“ als Rückweg per Knopf | Einen solchen Rückweg gibt es nicht. Eine ältere Version lässt sich im Expertenmodus installieren („bestimmte Version installieren“), die Daten des Adapters kommen dabei aber nicht mit zurück. Die Liste dort markiert „aktuell“, „latest“ und „stable“, nicht die vorher installierte Version. Idee von mcm1957: die letzte Version dort markieren ([#56](https://forum.iobroker.net/post/1364786)). Verwandt, aber nicht dasselbe: [ioBroker.admin #2973](https://github.com/ioBroker/ioBroker.admin/issues/2973) (Downgrade auf die Version im Repository, z. B. nach Wechsel von latest auf stable) |
+| Startet HA nach einem Core-Update nicht, spielt der Supervisor die alte Version zurück, sichert das Log und meldet das | Das Controller-Update per Knopf stoppt den Controller, installiert und startet neu. Ein Fehler wird gemeldet, ein Rücksprung auf die alte Version passiert nicht. mcm1957: „muss man sich ansehen“ ([#56](https://forum.iobroker.net/post/1364786)) |
 | Der Supervisor prüft stündlich, u. a. „kein aktuelles Backup“, Speicherplatz, Neustart nötig. Behobene Probleme verschwinden von selbst, ohne Probleme steht dort „Aktuell stehen keine Reparaturen an“ | Speicherplatz und „Neustart nötig“ meldet der js-controller auch in der Glocke. Eine zentrale Prüfung auf ein aktuelles Backup gibt es nicht (`iob diag` merkt in der noch nicht veröffentlichten Version ein leeres Backup-Verzeichnis an). Die Kachel „Systemstatus OK“ prüft nur, ob der Host antwortet. Siehe Punkt 1 |
 | Wichtige Infos gesammelt in der Systemübersicht, z. B. „Letzte Datensicherung vor 6 Stunden“, „39 % belegt“ | Auch vorhanden, aber verteilt auf BackItUp-Reiter, Hosts und Glocke |
-| Regel für die Entwickler: Was für Nutzer wegfällt, muss mindestens 6 Monate vorher angekündigt werden, mit Meldung, ab welcher Version es nicht mehr geht ([Doku](https://contributors.home-assistant.io/core/development/deprecating/)) | Siehe „Abkündigungen mit Datum“ unten |
+| Regel für die Entwickler: Was für Nutzer wegfällt, muss mindestens 6 Monate vorher angekündigt werden, mit Meldung, ab welcher Version es nicht mehr geht ([Doku](https://contributors.home-assistant.io/core/development/deprecating/)) | Siehe „Abkündigungen mit Datum“ unten. mcm1957: Beim Core ist in den letzten Jahren kaum etwas weggefallen, bei Adaptern kann nur der Maintainer ankündigen. Weil niemand eine neue Major-Version sofort einspielen muss, ist die Ankündigung im Grunde gegeben ([#56](https://forum.iobroker.net/post/1364786)) |
 
 Zur Einordnung:
 
 - Rücksprung und die stündlichen Systemprüfungen macht bei HA der Supervisor. Den gibt es nur auf HA OS (und der Supervised-Installation), nicht bei der reinen Docker-Installation.
 - Auf der Reparaturen-Seite landen zwei Arten von Meldungen: zentrale vom System (Supervisor und HA-Core, z. B. Backup, Speicherplatz, Neustart, veraltete Konfiguration) und Meldungen der Integrationen selbst (laut HA-Doku z. B. zu alte Gerätefirmware, abgeschaltete API, nicht mehr unterstützte Konfiguration). Letztere müssen die Integrationen tatsächlich selbst umsetzen, wie mcm1957 angemerkt hat ([#44](https://forum.iobroker.net/post/1364681)).
-- Bei ioBroker gibt es für beides schon Gegenstücke: Adapter können eigene Meldungen in der Glocke anlegen (BackItUp z. B. bei fehlgeschlagenen Backups), zentrale Meldungen kommen vom js-controller. Was fehlt, sind vor allem die Prüfungen aus `iob diag` im Admin und eine Prüfung auf ein aktuelles Backup (Punkt 1).
+- Bei ioBroker gibt es für beides schon Gegenstücke: Adapter können eigene Meldungen in der Glocke anlegen (BackItUp z. B. bei fehlgeschlagenen Backups), zentrale Meldungen kommen vom js-controller. Außerdem kann ein Entwickler über die Admin-Meldungen gezielt alle Installationen mit einer bestimmten Adapterversion anschreiben, z. B. wenn eine API abgeschaltet wurde. Das wird laut mcm1957 aber kaum genutzt, und API-Abschaltungen sind meist Reaktion statt Ankündigung ([#57](https://forum.iobroker.net/post/1364787)). Was fehlt, sind vor allem die Prüfungen aus `iob diag` im Admin und eine Prüfung auf ein aktuelles Backup (Punkt 1).
 
 ## Bewusst nicht weiterverfolgt
 
