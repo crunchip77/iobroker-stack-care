@@ -81,7 +81,7 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 ## Gesehen bei Home Assistant (noch nicht diskutiert)
 
-Verglichen mit einer HA-OS-Installation (Stand 2026.11) und der HA-Doku. Vieles davon hat ioBroker auch: Changelog im Update-Dialog, Version ignorieren, tägliches Minimal-Backup von BackItUp ab Werk (02:48 Uhr, lokal, 10 Tage), letztes und nächstes Backup im BackItUp-Reiter, freier Speicherplatz und neuer js-controller unter „Hosts“, Meldungen in der Glocke z. B. bei wenig Speicherplatz, bei einer ständig abstürzenden Instanz (wird gestoppt) oder einer zurückgezogenen Version (Instanz wird deaktiviert).
+Verglichen mit einer HA-OS-Installation (Stand 2026.11) und der HA-Doku. Vieles davon hat ioBroker auch: Changelog im Update-Dialog, Version ignorieren, Warnung vor Major-Updates auf der Konsole, BackItUp bei der Neuinstallation über den Installer mit täglichem Minimal-Backup ab Werk (02:48 Uhr, lokal, 10 Tage aufbewahrt), letztes und nächstes Backup im BackItUp-Reiter, freier Speicherplatz und neuer js-controller unter „Hosts“, Meldungen in der Glocke z. B. bei wenig Speicherplatz, bei einer ständig abstürzenden Instanz (wird gestoppt) oder einer zurückgezogenen Version (Instanz wird deaktiviert).
 
 Was HA anders macht:
 
@@ -89,12 +89,16 @@ Was HA anders macht:
 |------|-------------|
 | Im Update-Dialog steht „Letztes automatisches Backup vor 6 Stunden“, daneben ein Schalter „Automatisches Backup vor dem Update“ (Voreinstellung wählbar, pro Update änderbar) | BackItUp kennt das letzte Backup (`backitup.0.history.iobrokerLastTime`), im Update-Dialog wird es nicht angezeigt. Siehe auch Punkt 3 |
 | Bei App-Updates „Backup der letzten Version behalten“ als Rückweg per Knopf | Zurück nur über den Expertenmodus („bestimmte Version installieren“). Verwandt, aber nicht dasselbe: [ioBroker.admin #2973](https://github.com/ioBroker/ioBroker.admin/issues/2973) (Downgrade auf die Version im Repository, z. B. nach Wechsel von latest auf stable) |
-| Startet HA nach einem Core-Update nicht, spielt der Supervisor die alte Version zurück, sichert das Log und meldet das | Beim Controller-Update per Knopf wird ein Fehler nur ins Log geschrieben, kein Rücksprung |
-| Der Supervisor prüft stündlich zentral, u. a. „kein aktuelles Backup“, Speicherplatz, Neustart nötig. Behobene Probleme verschwinden von selbst, ohne Probleme steht dort „Aktuell stehen keine Reparaturen an“ | Einzelne Meldungen kommen in der Glocke, eine ausdrückliche Rückmeldung „alles in Ordnung“ gibt es nicht. Siehe Punkt 1 |
+| Startet HA nach einem Core-Update nicht, spielt der Supervisor die alte Version zurück, sichert das Log und meldet das | Das Controller-Update per Knopf stoppt den Controller, installiert und startet neu. Ein Fehler wird gemeldet, ein Rücksprung auf die alte Version passiert nicht |
+| Der Supervisor prüft stündlich, u. a. „kein aktuelles Backup“, Speicherplatz, Neustart nötig. Behobene Probleme verschwinden von selbst, ohne Probleme steht dort „Aktuell stehen keine Reparaturen an“ | Speicherplatz und „Neustart nötig“ meldet der js-controller auch in der Glocke. Eine zentrale Prüfung auf ein aktuelles Backup gibt es nicht (`iob diag` merkt in der noch nicht veröffentlichten Version ein leeres Backup-Verzeichnis an). Die Kachel „Systemstatus OK“ prüft nur, ob der Host antwortet. Siehe Punkt 1 |
 | Wichtige Infos gesammelt in der Systemübersicht, z. B. „Letzte Datensicherung vor 6 Stunden“, „39 % belegt“ | Auch vorhanden, aber verteilt auf BackItUp-Reiter, Hosts und Glocke |
-| Was für Nutzer wegfällt, muss mindestens 6 Monate vorher angekündigt werden, mit Meldung, ab welcher Version es nicht mehr geht ([Doku](https://contributors.home-assistant.io/core/development/deprecating/)) | Keine feste Regel, siehe „Abkündigungen mit Datum“ unten |
+| Regel für die Entwickler: Was für Nutzer wegfällt, muss mindestens 6 Monate vorher angekündigt werden, mit Meldung, ab welcher Version es nicht mehr geht ([Doku](https://contributors.home-assistant.io/core/development/deprecating/)) | Siehe „Abkündigungen mit Datum“ unten |
 
-Zur Einordnung: Rücksprung und Systemprüfungen macht bei HA der Supervisor, den gibt es nur auf HA OS, nicht bei der reinen Docker-Installation. Der System-Teil der Reparaturen-Seite kommt dort also zentral und nicht von den Integrationen. Bei ioBroker entspricht das am ehesten `iob diag` (Punkt 1).
+Zur Einordnung:
+
+- Rücksprung und die stündlichen Systemprüfungen macht bei HA der Supervisor. Den gibt es nur auf HA OS (und der Supervised-Installation), nicht bei der reinen Docker-Installation.
+- Auf der Reparaturen-Seite landen zwei Arten von Meldungen: zentrale vom System (Supervisor und HA-Core, z. B. Backup, Speicherplatz, Neustart, veraltete Konfiguration) und Meldungen der Integrationen selbst (laut HA-Doku z. B. zu alte Gerätefirmware, abgeschaltete API, nicht mehr unterstützte Konfiguration). Letztere müssen die Integrationen tatsächlich selbst umsetzen, wie mcm1957 angemerkt hat ([#44](https://forum.iobroker.net/post/1364681)).
+- Bei ioBroker gibt es für beides schon Gegenstücke: Adapter können eigene Meldungen in der Glocke anlegen (BackItUp z. B. bei fehlgeschlagenen Backups), zentrale Meldungen kommen vom js-controller. Was fehlt, sind vor allem die Prüfungen aus `iob diag` im Admin und eine Prüfung auf ein aktuelles Backup (Punkt 1).
 
 ## Bewusst nicht weiterverfolgt
 
