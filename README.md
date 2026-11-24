@@ -10,6 +10,23 @@ Viele Nutzer wollen ihr Haus automatisieren, müssen sich aber nebenbei um Betri
 
 Ein kuratiertes Gesamt-Release wie bei Debian oder Home Assistant passt nicht zu ioBroker, weil die Adapter bewusst unabhängig sind. Die Vorschläge unten bauen deshalb auf vorhandenen Teilen auf.
 
+## Übersicht
+
+| Thema | Stand | Begründung |
+|------|------|-------------|
+| Widerspruch in der Update-Doku (Punkt 6) | erledigt | [ioBroker.docs #1013](https://github.com/ioBroker/ioBroker.docs/issues/1013), behoben mit [PR #1014](https://github.com/ioBroker/ioBroker.docs/pull/1014) |
+| Node nicht mehr empfohlen (Teil von Punkt 1) | Issue da, PR offen | [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746), [PR #3747](https://github.com/ioBroker/ioBroker.admin/pull/3747) noch nicht gemergt |
+| OS-Version läuft aus (Teil von Punkt 1) | Issue da, noch nicht umgesetzt | [ioBroker.admin #3535](https://github.com/ioBroker/ioBroker.admin/issues/3535), Bluefox schlägt lokale Prüfung im js-controller vor |
+| Warnung vor Major-Update (Punkt 2) | Issue da | [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161). Markierung in der Glocke wäre nur eine Ergänzung dazu |
+| Letztes Backup anzeigen, Backup vor Update (Punkt 3) | Issue da | [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), auf Wunsch von mcm1957 |
+| Vorherige Adapter-Version markieren | Issue da | [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), Idee von mcm1957 |
+| `iob diag` in der Kachel „Systemstatus“ (Punkt 1) | ausstehend | Node und OS haben schon Issues, der Rest (root, 32 Bit, Vorabversionen, leeres Backup-Verzeichnis, ausdrückliches „alles in Ordnung“) nicht. Kachel prüft heute nur, ob der Host antwortet |
+| Planbare Node-Empfehlung (Punkt 4) | ausstehend, eher Dev-Meeting | Thomas Braun vorgeschlagen, mcm1957 einverstanden als Empfehlung. Kein Code, sondern Absprache |
+| Ablauf der Releases in der Doku (Punkt 5) | ausstehend, eher Dev-Meeting | Vorschlag von OliverIO, gehört ins Docs-Repo |
+| Rücksprung auf die alte Controller-Version bei fehlgeschlagenem Update | noch klären | mcm1957: „muss man sich ansehen“. Technisch unklar, ob das mit npm so einfach ginge wie bei HA OS |
+| Abkündigungen mit Datum | bewusst nicht als Issue | mcm1957: beim Core in den letzten Jahren kaum etwas weggefallen, bei Adaptern nur der Maintainer. Bleibt im Auge |
+| Kuratiertes Gesamt-Release, fester Rhythmus, Reparaturen-Seite wie bei HA | bewusst nicht | Passt nicht zu unabhängigen Adaptern bzw. müsste jeder Adapter-Entwickler umsetzen |
+
 ## Vorschläge
 
 ### 1. Ergebnis von `iob diag` im Admin anzeigen
