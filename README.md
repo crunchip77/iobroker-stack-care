@@ -2,7 +2,7 @@
 
 Zusammenfassung der Diskussion im ioBroker-Forum: [Updates & Systempflege – geht das für Normalnutzer einfacher?](https://forum.iobroker.net/topic/85889/updates-systempflege-geht-das-für-normalnutzer-einfacher)
 
-> **Stand:** 24. November 2026 – die Diskussion läuft noch. Privat zusammengestellt, nichts Offizielles von ioBroker. Gedacht als Grundlage, falls die Punkte z. B. im Dev-Meeting besprochen werden.
+> **Stand:** 27. November 2026 – die Diskussion läuft noch. Privat zusammengestellt, nichts Offizielles von ioBroker. Gedacht als Grundlage, falls die Punkte z. B. im Dev-Meeting besprochen werden. Mehrere Admin-Fixes sind am 27.11. gemergt, sie kommen mit der nächsten Admin-Version, nicht zwingend schon in 8.3.15.
 
 ## Worum es geht
 
@@ -15,16 +15,15 @@ Ein kuratiertes Gesamt-Release wie bei Debian oder Home Assistant passt nicht zu
 | Thema | Stand | Begründung |
 |------|------|-------------|
 | Widerspruch in der Update-Doku (Punkt 6) | erledigt | [ioBroker.docs #1013](https://github.com/ioBroker/ioBroker.docs/issues/1013), behoben mit [PR #1014](https://github.com/ioBroker/ioBroker.docs/pull/1014) |
-| Node nicht mehr empfohlen (Teil von Punkt 1) | Issue da, PR offen | [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746), [PR #3747](https://github.com/ioBroker/ioBroker.admin/pull/3747) noch nicht gemergt |
-| OS-Version läuft aus (Teil von Punkt 1) | Issue da, noch nicht umgesetzt | [ioBroker.admin #3535](https://github.com/ioBroker/ioBroker.admin/issues/3535), Bluefox schlägt lokale Prüfung im js-controller vor |
-| Warnung vor Major-Update (Punkt 2) | Issue da | [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161). Markierung in der Glocke wäre nur eine Ergänzung dazu |
-| Letztes Backup anzeigen, Backup vor Update, Hinweis „nur lokal“ (Punkt 3) | Issue da | [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), Kommentar zur Übersicht und zum zweiten Speicherort |
-| Vorherige Adapter-Version markieren, Rückweg ohne Expertenmodus (Punkt 7) | Issue da | [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), Kommentar: Dialog nach fehlgeschlagenem Start auch ohne Expertenmodus |
-| Adapter braucht neuere Node, Plus installiert trotzdem (Punkt 10) | Bug-Issue da | Bei Updates zeigt der Admin schon rot und installiert nicht. Bei Neuinstallation per **+** (auch Kachelmodus) läuft npm und bricht mit exit 25 ab. → [ioBroker.admin #3753](https://github.com/ioBroker/ioBroker.admin/issues/3753). [#3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) war das Enhancement „Update nicht anbieten“, das trifft so nicht; dort nur noch Doku-Link/Icon offen |
-| Docker: Image-Tag statt `latest` (Punkt 8) | Issue da | [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016). Glocke hat schon `dockerUpdate` |
+| Node nicht mehr empfohlen (Teil von Punkt 1) | erledigt im Admin (nächste Version) | [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746), gemergt mit [PR #3747](https://github.com/ioBroker/ioBroker.admin/pull/3747) (27.11.2026): Glocke plus Log. Systemstatus-Kachel hat Bluefox als eigenen PR zugesagt, noch nicht da |
+| OS-Version läuft aus (Teil von Punkt 1) | Issue da, noch nicht umgesetzt | [ioBroker.admin #3535](https://github.com/ioBroker/ioBroker.admin/issues/3535), Bluefox schlägt lokale Prüfung im js-controller vor. Weitere `iob diag`-Prüfungen sollen laut ihm dort bleiben |
+| Warnung vor Major-Update (Punkt 2) | erledigt im Admin (nächste Version) | [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161), gemergt mit [PR #3763](https://github.com/ioBroker/ioBroker.admin/pull/3763): Bestätigung wie auf der Konsole, Majors in der Liste „alle aktualisieren“ markiert |
+| Letztes Backup anzeigen, Backup vor Update, Hinweis „nur lokal“ (Punkt 3) | Issue da | [ioBroker.admin #3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), noch ohne neue Antwort |
+| Vorherige Adapter-Version markieren (Punkt 7) | teilweise erledigt | [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), [PR #3764](https://github.com/ioBroker/ioBroker.admin/pull/3764) gemergt: Hinweis im Dialog, dass nur der Code zurückkommt. Markierung „(previous)“ wartet auf [js-controller #3645](https://github.com/ioBroker/ioBroker.js-controller/issues/3645) |
+| Adapter braucht neuere Node, Plus installiert trotzdem (Punkt 10) | erledigt im Admin (nächste Version) | [ioBroker.admin #3753](https://github.com/ioBroker/ioBroker.admin/issues/3753), [PR #3762](https://github.com/ioBroker/ioBroker.admin/pull/3762) gemergt. [#3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) geschlossen, gehörte dazu |
+| Docker: Image-Tag statt `latest` (Punkt 8) | Issue da, PR zugesagt | [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016). Bluefox ergänzt `install/docker.md` (Backup, Tag merken, pull, up, Rollback) |
 | Eine Übersicht statt vier Stellen (Teil von Punkt 1) | an vorhandene Issues gehängt | Kommentare an [#3750](https://github.com/ioBroker/ioBroker.admin/issues/3750), [#1914](https://github.com/ioBroker/ioBroker.admin/issues/1914), [#3746](https://github.com/ioBroker/ioBroker.admin/issues/3746) |
-| Major-Updates in der Liste/Glocke gruppieren (Punkt 2) | an vorhandenes Issue gehängt | Kommentar an [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) |
-| `iob diag` in der Kachel „Systemstatus“ (Punkt 1) | ausstehend | Node und OS haben schon Issues, der Rest (root, 32 Bit, Vorabversionen, leeres Backup-Verzeichnis, ausdrückliches „alles in Ordnung“) nicht. Kachel prüft heute nur, ob der Host antwortet |
+| `iob diag` in der Kachel „Systemstatus“ (Punkt 1) | teilweise zugesagt | Node-Check in der Kachel eigener PR (noch nicht da). Rest (root, 32 Bit, Vorabversionen, leeres Backup-Verzeichnis) bei #3535 |
 | Planbare Node-Empfehlung (Punkt 4) | ausstehend, eher Dev-Meeting | Thomas Braun vorgeschlagen, mcm1957 einverstanden als Empfehlung. Kein Code, sondern Absprache |
 | Ablauf der Releases in der Doku (Punkt 5) | ausstehend, eher Dev-Meeting | Vorschlag von OliverIO, gehört ins Docs-Repo |
 | Rücksprung auf die alte Controller-Version bei fehlgeschlagenem Update | noch klären | mcm1957: „muss man sich ansehen“. Technisch unklar, ob das mit npm so einfach ginge wie bei HA OS |
@@ -45,11 +44,11 @@ Dazu gehört, die verstreuten Infos an einer Stelle zu sammeln. Heute liegen let
 
 **Aus dem Thread:** Thomas Braun ([#53](https://forum.iobroker.net/post/1364694), [#31](https://forum.iobroker.net/post/1364633)), mcm1957: umsetzbar, wenn die Regeln definierbar sind ([#47](https://forum.iobroker.net/post/1364687)), OliverIO: prominent, ohne wiederholtes Wegklicken ([#45](https://forum.iobroker.net/post/1364684))
 
-**Status:** offen
+**Status:** teilweise erledigt (Node-Meldung in der Glocke ab nächster Admin-Version). OS und restliche `iob diag`-Prüfungen weiter offen (#3535). Systemstatus-Kachel: Node-Check von Bluefox zugesagt, PR noch nicht da.
 
-Zwei Teile davon sind schon als Issue eingetragen:
+Zwei Teile davon:
 
-- **Node-Version nicht mehr empfohlen:** Das Repository nennt `nodeJsRecommended`, eine Meldung gab es bisher aber nicht. Idee aus dem Thread: wiederkehrende Erinnerung plus Log-Eintrag, kein hartes Abschalten – mcm1957 ([#35](https://forum.iobroker.net/post/1364641)). → [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746). Umsetzung liegt als [PR #3747](https://github.com/ioBroker/ioBroker.admin/pull/3747) vor (noch nicht gemergt): Warnung im Log und Meldung in der Glocke, höchstens alle 7 Tage, bei Docker mit Hinweis auf ein neueres Image.
+- **Node-Version nicht mehr empfohlen:** Das Repository nennt `nodeJsRecommended`, eine Meldung gab es bisher aber nicht. Idee aus dem Thread: wiederkehrende Erinnerung plus Log-Eintrag, kein hartes Abschalten – mcm1957 ([#35](https://forum.iobroker.net/post/1364641)). → [ioBroker.admin #3746](https://github.com/ioBroker/ioBroker.admin/issues/3746), erledigt mit [PR #3747](https://github.com/ioBroker/ioBroker.admin/pull/3747) (gemergt 27.11.2026): Warnung im Log und Meldung in der Glocke, höchstens alle 7 Tage, bei Docker mit Hinweis auf ein neueres Image. Die Kachel „Systemstatus“ soll laut Bluefox in einem eigenen PR nicht mehr OK zeigen, wenn Node unter der Empfehlung liegt; der PR ist noch nicht da.
 - **OS-Version läuft aus:** Es gibt eine Meldung für Paket-Updates, aber keine, wenn die Debian-Version selbst ausläuft. → [ioBroker.admin #3535](https://github.com/ioBroker/ioBroker.admin/issues/3535) (von mcm1957), ergänzt um den Hinweis auf `distro-info` von Thomas Braun ([#31](https://forum.iobroker.net/post/1364633)). Im Issue schlägt Bluefox eine lokale Prüfung mit `distro-info` vor, als Meldung des js-controllers, die der Admin dann anzeigt. mcm1957 ist einverstanden, die Meldung soll wiederkommen (mindestens bei jedem Start), aber nicht täglich nerven. Noch nicht umgesetzt.
 
 Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.com/ioBroker/ioBroker.admin/issues/2553) (Dialogtext missverständlich, der Knopf aktualisiert nur innerhalb der installierten Hauptversion) und [#3152](https://github.com/ioBroker/ioBroker.admin/issues/3152) (bei einer neuen Hauptversion zeigt der Knopf ein Update an, führt es aber nicht aus)
@@ -62,7 +61,7 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Aus dem Thread:** Vorschlag von mcm1957 ([#44](https://forum.iobroker.net/post/1364681))
 
-**Status:** Gibt es schon als Issue: [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) (Garfonso, offen). Dort geht es um eine Warnung mit Bestätigung vor einem Major-Update im Admin, auf der Kommandozeile gibt es die schon. Ergänzung als Kommentar dort: Major-Updates in der Update-Liste und in der Glocke markieren oder gruppieren, damit ein Sprung wie 4→5 nicht zwischen 40 Patches untergeht.
+**Status:** erledigt im Admin (nächste Version) → [ioBroker.admin #3161](https://github.com/ioBroker/ioBroker.admin/issues/3161), [PR #3763](https://github.com/ioBroker/ioBroker.admin/pull/3763) gemergt am 27.11.2026. Bestätigung bei Major-Wechsel wie auf der Konsole, Majors in der Liste „alle aktualisieren“ markiert.
 
 ### 3. Backup vor dem Controller-Update per Knopf
 
@@ -108,7 +107,7 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Vorschlag:** Nach dem Update kurz sagen, ob die Instanz wieder läuft. Wenn nicht: vorherige Version nennen und den Dialog „bestimmte Version installieren“ anbieten, auch ohne Expertenmodus. Der Code kommt zurück, Objekte und States nicht – das muss im Dialog stehen.
 
-**Status:** an [#3751](https://github.com/ioBroker/ioBroker.admin/issues/3751) als Kommentar gehängt (Markierung der vorherigen Version plus Dialog ohne Expertenmodus nach fehlgeschlagenem Start)
+**Status:** teilweise erledigt → [ioBroker.admin #3751](https://github.com/ioBroker/ioBroker.admin/issues/3751), [PR #3764](https://github.com/ioBroker/ioBroker.admin/pull/3764) gemergt. Im Dialog steht, dass ein Downgrade nur den Code ersetzt, nicht Objekte/States. Die Markierung „(previous)“ kommt erst, wenn der js-controller die alte Version speichert: [js-controller #3645](https://github.com/ioBroker/ioBroker.js-controller/issues/3645) (offen). Den Knopf für die Version aus dem Repository gibt es laut Bluefox schon ohne Expertenmodus.
 
 ### 8. Docker: Image-Tag statt `latest`
 
@@ -116,19 +115,17 @@ Verwandt, zum Node-Update aus dem Admin: [ioBroker.admin #2553](https://github.c
 
 **Vorschlag:** In der Doku die Schritte festhalten: Tag pinnen, neues Image ziehen, Container neu anlegen (Daten im Volume bleiben). In der Übersicht oder in der Glocke den aktuellen und den neuen Tag nennen, wenn die Meldung schon kommt.
 
-**Status:** → [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016)
+**Status:** → [ioBroker.docs #1016](https://github.com/ioBroker/ioBroker.docs/issues/1016). Bluefox sagt zu: Abschnitt in `install/docker.md` (Backup, aktuellen Tag merken, `docker compose pull` / `up -d`, Rollback) und Verweise von den Update-Seiten. PR noch nicht da.
 
 ### 9. Adapter-Updates nach Größe gruppieren
 
-Siehe Punkt 2. Nur die Liste/Glocke, nicht der Bestätigungsdialog – der liegt schon in [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161).
+Siehe Punkt 2. Die Markierung in der Liste „alle aktualisieren“ ist mit [#3161](https://github.com/ioBroker/ioBroker.admin/issues/3161) / [PR #3763](https://github.com/ioBroker/ioBroker.admin/pull/3763) dabei. Die Glocke bleibt eine flache Liste.
 
 ### 10. Adapter braucht neuere Node.js – Plus installiert trotzdem
 
-**Heute:** Die Doku erklärt seit #1013, was man tun soll, wenn ein Adapter schon eine neuere Node-Version verlangt. **Updates:** Der Admin zeigt die Version rot und installiert über diesen Weg nicht (Tooltip mit der fehlenden Abhängigkeit). **Neuinstallation:** Das Plus in der Adapterliste (und die Installation im Kachelmodus) prüft Node nicht, nur das Betriebssystem. Die Installation läuft, npm bricht mit exit 25 ab. Nachgestellt auf einem Testhost (Admin 8.3.15, js-controller 7.2.5, Node 22, Adapter aus latest mit `>= 24`).
+**Vorher:** Updates: Version rot, Bestätigen-Knopf im Dialog deaktiviert. Neuinstallation: Plus prüfte nur das Betriebssystem, npm brach mit exit 25 ab (Testhost Admin 8.3.15, js-controller 7.2.5, Node 22, Adapter aus latest mit `>= 24`).
 
-**Vorschlag:** Plus nicht durchlassen, wenn `common.node` nicht passt, in der Zeilen- und in der Kachelansicht gleich. Updates nicht verstecken, die rote Anzeige reicht dort.
-
-**Status:** Bug → [ioBroker.admin #3753](https://github.com/ioBroker/ioBroker.admin/issues/3753). Das ältere Enhancement [#3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) (Update ausgrauen) trifft so nicht; mcm1957 will die Updates weiter sehen. Dort höchstens noch Doku-Link oder deutlicheres Icon.
+**Status:** erledigt im Admin (nächste Version) → [ioBroker.admin #3753](https://github.com/ioBroker/ioBroker.admin/issues/3753), [PR #3762](https://github.com/ioBroker/ioBroker.admin/pull/3762) gemergt am 27.11.2026. Plus wird deaktiviert, Hinweis welche Node nötig ist, Zeilen- und Kachelmodus gleich. [#3752](https://github.com/ioBroker/ioBroker.admin/issues/3752) ist geschlossen, das gehörte dazu.
 
 ## Gesehen bei Home Assistant (noch nicht diskutiert)
 
